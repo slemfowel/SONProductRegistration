@@ -1,0 +1,39 @@
+﻿@using System.Configuration;
+
+<!DOCTYPE html>
+<html lang="en" class="h-100" id="login-page2">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Product Registration</title>
+
+    <link href="~/son-vatebra.css" rel="stylesheet">
+
+</head>
+<body>
+    <div>
+        @RenderBody()
+    </div>
+
+    <div class="page-loader" id="page-loader" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="loader">
+            <div class="controls-loader" large>
+                <div class="loader-wrappr">
+                    <div class="loadr-itm loader">
+                        <div class="loader-circle"></div>
+                        <div class="loader-line-mask">
+                            <div class="loader-line"></div>
+                        </div>
+                    </div>
+                    <div class="loadr-itm hint"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var baseUrl = "@Html.Raw(ConfigurationManager.AppSettings["BaseUrl"].ToString())";
+    </script>
+    <script src="~/son-vatebra.js"></script>
+</body>
+</html>

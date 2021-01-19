@@ -1,0 +1,244 @@
+﻿@using SonProductRegistration.Web.CustomEnum;
+
+@model SonProductRegistration.Web.ViewModels.CompanyProductBrandViewModel
+
+@{
+    /**/
+
+}
+<div id="createoredit-product-brand-component">
+    @using (Html.BeginForm("edit", "companyproductbrands", FormMethod.Post, new { id = "createoredit-product-brand-form", enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        @Html.HiddenFor(model => model.CompanyProductID)
+
+
+        <ul class="nav nav-sidebar">
+            <li class="sidebar-nav-item with-sub">
+                <a href="" class="sidebar-nav-link font-weight-bold text-20px height-53px"><i class="icon ion-ios-book-outline"></i>Edit Brand Details</a>
+                <div class="stackable-view-panel-canvax bg-white" id="brand-details-tab">
+                    <div class="brand-details-panel p-4 width-750px">
+
+                        <div id="brand-details-section" class="mb-5 ml-4 mr-4">
+
+                            <div class="mb-3 d-flex">
+                                <div class="w-35 font-weight-normal text-secondary margin-right-3px line-height-40px">Product Warranty:</div>
+                                <div class="w-75">
+                                    <div class="custom-file d-flex mb-2">
+                                        <div class="min-width-72px btn p-0 border-0 position-relative overflow-hidden">
+                                            <input type="file" class="custom-file-input" id="ProductWarrantyFile" name="@DocumentTypeEnum.ProductWarranty">
+                                            <label class="custom-file-label min-width-70px" for="ProductWarrantyFile">Upload Document</label>
+                                        </div>
+                                        <div class="w-50 line-height-42px pl-1">(300KB Max, JPG or PDF)</div>
+                                    </div>
+                                    @{
+                                        var productWarrantyDocument = Model.Documents.Where(x => x.EnumType == (int)DocumentTypeEnum.ProductWarranty).FirstOrDefault();
+                                        var productWarranty = @ViewBag.BaseUrl + "/image/productphoto/" + productWarrantyDocument.DocumentID;
+                                    }
+                                    <div id="" class="card width-300px height-300px border-0 shadow product-photo-item" style="background-image: url('@productWarranty');">
+                                        <div class="card-body"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mb-3 d-flex">
+                                <div class="w-35 font-weight-normal text-secondary margin-right-3px line-height-40px">Brand Name:</div>
+                                <div class="w-75 text-dark">
+                                    @Html.EditorFor(model => model.BrandName, new { @htmlAttributes = new { @class = "form-control w-100" } })
+                                    @Html.ValidationMessageFor(model => model.BrandName, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="mb-3 d-flex">
+                                <div class="w-35 font-weight-normal text-secondary margin-right-3px line-height-40px">Product Picture (*):</div>
+                                <div class="w-75">
+                                    <div class="custom-file d-flex">
+                                        <div class="min-width-72px btn p-0 border-0 position-relative overflow-hidden">
+                                            <input type="file" class="custom-file-input" id="ProductPhotoFile" name="@DocumentTypeEnum.ProductPhoto">
+                                            <label class="custom-file-label min-width-70px" for="ProductPhotoFile">Upload Photo</label>
+                                        </div>
+                                        <div class="w-50 line-height-42px pl-1">(300KB Max, JPG or PDF)</div>
+                                    </div>
+                                    @{
+                                        var productPhoto = @ViewBag.BaseUrl + "/image/productphoto/" + @Model.ProductPhotoID;
+                                    }
+                                    <div id="" class="card width-300px height-300px border-0 shadow product-photo-item" style="background-image: url('@productPhoto');">
+                                        <div class="card-body"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mb-3 d-flex">
+                                <div class="w-35 font-weight-normal text-secondary margin-right-3px line-height-40px">Product Full Description:</div>
+                                <div class="w-75 text-dark">
+                                    <textarea class="form-control w-100" name="ProductDescription">@Model.ProductDescription</textarea>
+                                    @Html.ValidationMessageFor(model => model.ProductDescription, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="mb-3 d-flex">
+                                <div class="w-35 font-weight-normal text-secondary margin-right-3px line-height-40px">Major Product Components</div>
+                                <div class="w-75 text-dark">
+                                    <textarea name="ProductComponent" class="form-control w-100">@Model.ProductComponent</textarea>
+                                    @Html.ValidationMessageFor(model => model.ProductComponent, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="mb-3 d-flex">
+                                <div class="w-35 font-weight-normal text-secondary margin-right-3px line-height-40px">Product Literature:</div>
+                                <div class="w-75">
+                                    <div class="custom-file d-flex mb-2">
+                                        <div class="min-width-72px btn p-0 border-0 position-relative overflow-hidden">
+                                            <input type="file" class="custom-file-input" id="ProductLiteratureFile" name="@DocumentTypeEnum.ProductLiterature">
+                                            <label class="custom-file-label min-width-70px" for="ProductLiteratureFile">Upload Document</label>
+                                        </div>
+                                        <div class="w-50 line-height-42px pl-1">(300KB Max, JPG or PDF)</div>
+                                    </div>
+                                    <div class="alert alert-info">Please note that this document must be in english</div>
+                                    @{
+                                        var productLiteratureDocument = Model.Documents.Where(x => x.EnumType == (int)DocumentTypeEnum.ProductLiterature).FirstOrDefault();
+                                        var productLiterature = @ViewBag.BaseUrl + "/image/productphoto/" + productLiteratureDocument.DocumentID;
+                                    }
+                                    <div id="" class="card width-300px height-300px border-0 shadow product-photo-item" style="background-image: url('@productLiterature');">
+                                        <div class="card-body"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mb-3 d-flex">
+                                <div class="w-35 font-weight-normal text-secondary margin-right-3px line-height-40px">Standards/Specification:</div>
+                                <div class="w-75">
+                                    <div class="custom-file d-flex mb-2">
+                                        <div class="min-width-72px btn btn-primary p-0 border-0 position-relative overflow-hidden">
+                                            <input type="file" class="custom-file-input" id="ProductSpecificationFile" name="@DocumentTypeEnum.ProductSpecification" />
+                                            <label class="custom-file-label min-width-70px" for="ProductSpecificationFile">Upload Document</label>
+                                        </div>
+                                        <div class="w-50 line-height-42px pl-1">(300KB Max, JPG or PDF)</div>
+                                    </div>
+                                    <div class="alert alert-info">Please note that this document must be in english</div>
+                                    @{
+                                        var productSpecificationDocument = Model.Documents.Where(x => x.EnumType == (int)DocumentTypeEnum.ProductSpecification).FirstOrDefault();
+                                    }
+                                    @if(null != productSpecificationDocument) {
+                                        var productSpecification = @ViewBag.BaseUrl + "/image/productphoto/" + productSpecificationDocument.DocumentID;
+                                        <div id="" class="card width-300px height-300px border-0 shadow product-photo-item" style="background-image: url('@productSpecification');">
+                                            <div class="card-body"></div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+
+                            <div class="mb-3 d-flex">
+                                <div class="w-35 font-weight-normal text-secondary margin-right-3px">Certificate of Analysis From Manufacturer:</div>
+                                <div class="w-75">
+                                    <div class="custom-file d-flex mb-2">
+                                        <div class="min-width-72px btn btn-primary p-0 border-0 position-relative overflow-hidden">
+                                            <input type="file" class="custom-file-input" id="ManufacturerCertificateOfAnalysisFile" name="@DocumentTypeEnum.ManufacturerCertificateOfAnalysis" />
+                                            <label class="custom-file-label min-width-70px" for="customFile">Upload Document</label>
+                                        </div>
+                                        <div class="w-50 line-height-42px pl-1">(300KB Max, JPG or PDF)</div>
+                                    </div>
+                                    <div class="alert alert-info">Please note that this document must be in english</div>
+                                    @{
+                                        var productCertificateOfAnalysisDocument = Model.Documents.Where(x => x.EnumType == (int)DocumentTypeEnum.ManufacturerCertificateOfAnalysis).FirstOrDefault();
+                                    }
+                                    @if(null != productCertificateOfAnalysisDocument) {
+                                        var productCertificateOfAnalysis = @ViewBag.BaseUrl + "/image/productphoto/" + productCertificateOfAnalysisDocument.DocumentID;
+                                    <div id="" class="card width-300px height-300px border-0 shadow product-photo-item" style="background-image: url('@productCertificateOfAnalysis');">
+                                        <div class="card-body"></div>
+                                    </div>
+                                    }
+                                </div>
+                            </div>
+
+                            <div class="mb-3 d-flex">
+                                <div class="w-35 font-weight-normal text-secondary margin-right-3px">Description of Manufacturing Process</div>
+                                <div class="w-75 text-dark">
+                                    <textarea class="form-control w-100" name="ManufacturingProcess">@Model.ManufacturingProcess</textarea>
+                                    @Html.ValidationMessageFor(model => model.ManufacturingProcess, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="mb-3 d-flex">
+                                <div class="w-35 font-weight-normal text-secondary margin-right-3px line-height-40px">Warehouse/Factory Address</div>
+                                <div class="w-75 text-dark">
+                                    <textarea class="form-control w-100" name="FactoryAddress">@Model.FactoryAddress</textarea>
+                                    @Html.ValidationMessageFor(model => model.FactoryAddress, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="mb-3 d-flex">
+                                <div class="w-35 font-weight-normal text-secondary margin-right-3px line-height-40px">Packaging Specifications/Sizes</div>
+                                <div class="w-75 text-dark">
+                                    <textarea class="form-control w-100" id="PackagingSpecifications" name="PackagingSpecifications">@Model.PackagingSpecifications</textarea>
+                                    @Html.ValidationMessageFor(model => model.PackagingSpecifications, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="mb-3 d-flex">
+                                <div class="w-35 font-weight-normal text-secondary margin-right-3px line-height-40px">Type of Business:</div>
+                                <div class="w-75 text-dark">
+                                    @Html.DropDownList("BusinessType", ViewBag.BusinessType as SelectList, htmlAttributes: new { @id = "business-type-combo", @class = "form-control w-100" })
+                                    @Html.ValidationMessageFor(model => model.BusinessType, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="mb-3 d-flex hide" id="required-documents">
+                                <div class="w-35 font-weight-normal text-secondary margin-right-3px line-height-40px">Required Documents:</div>
+                                <div class="w-75">
+                                    <div required-document type-of-business-requirement="3" class="custom-file d-flex mb-2 hide">
+                                        <div class="min-width-72px btn p-0 border-0 position-relative overflow-hidden">
+                                            <input type="file" class="custom-file-input" id="FranchiseAgreementFile" name="@DocumentTypeEnum.FranchiseAgreement">
+                                            <label class="custom-file-label max-width-70px" for="FranchiseAgreementFile">Upload</label>
+                                        </div>
+                                        <div class="w-100 line-height-42px pl-1">Manufacturing/Franchise Agreement Document</div>
+                                    </div>
+                                    <div required-document type-of-business-requirement="[2, 4]" class="custom-file d-flex mb-2 hide">
+                                        <div class="min-width-72px btn p-0 border-0 position-relative overflow-hidden">
+                                            <input type="file" class="custom-file-input" id="TrademarkCertificateFile" name="@DocumentTypeEnum.TrademarkCertificate">
+                                            <label class="custom-file-label max-width-70px" for="TrademarkCertificateFile">Upload</label>
+                                        </div>
+                                        <div class="w-100 line-height-42px pl-1">Trademark Certificate Document</div>
+                                    </div>
+                                    <div required-document type-of-business-requirement="0" class="custom-file d-flex mb-2 hide">
+                                        <div class="min-width-72px btn p-0 border-0 position-relative overflow-hidden">
+                                            <input type="file" class="custom-file-input" id="PowerOfAttorneyFile" name="@DocumentTypeEnum.PowerOfAttorney">
+                                            <label class="custom-file-label max-width-70px" for="PowerOfAttorneyFile">Upload</label>
+                                        </div>
+                                        <div class="w-100 line-height-42px pl-1">Power of Attorney Document</div>
+                                    </div>
+                                    <div required-document type-of-business-requirement="4" class="custom-file d-flex mb-2 hide">
+                                        <div class="min-width-72px btn p-0 border-0 position-relative overflow-hidden">
+                                            <input type="file" class="custom-file-input" id="CertificateOfFreeSaleFile" name="@DocumentTypeEnum.CertificateOfFreeSale">
+                                            <label class="custom-file-label max-width-70px" for="CertificateOfFreeSaleFile">Upload</label>
+                                        </div>
+                                        <div class="w-100 line-height-42px pl-1">Certificate of Free Sale Document</div>
+                                    </div>
+                                    @{
+                                        var businessTypeDocument = Model.Documents.Where(x => (x.EnumType == (int)(DocumentTypeEnum.TrademarkCertificate)) || (x.EnumType == (int)DocumentTypeEnum.PowerOfAttorney) || (x.EnumType == (int)DocumentTypeEnum.ManufacturerCertificateOfAnalysis) || (x.EnumType == (int)DocumentTypeEnum.ProductSpecification)).FirstOrDefault();
+                                        var requiredDocument = @ViewBag.BaseUrl + "/image/productphoto/" + businessTypeDocument.DocumentID;
+                                    }
+                                    <div id="" class="card width-300px height-300px border-0 shadow product-photo-item" style="background-image: url('@requiredDocument');">
+                                        <div class="card-body"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </li>
+        </ul>
+
+        <div class="mb-4 p-4 overflow-hidden">
+            <div class="float-right">
+                <input type="button" id="save-product-brand-button" class="btn btn-primary" value="Save & Continue" />
+                <input type="button" class="btn btn-secondary" value="Cancel" />
+            </div>
+        </div>
+    }
+</div>

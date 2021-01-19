@@ -1,0 +1,86 @@
+﻿@using SonProductRegistration.Web.Models
+@model LoginViewModel
+@{
+    ViewBag.Title = "Account Login";
+    Layout = "~/Views/Shared/_auth.cshtml";
+}
+
+<div id="company-login-component" class="d-md-flex flex-row-reverse">
+
+    <div class="signin-left all-wrapper with-pattern">
+        <div class="signin-box">
+            <h2 class="vatebra-logo" style="color:#ffffff !important">SON Product Registration</h2>
+
+            <p style="color:#ffffff !important">We are excited to launch our new SON Product Registration. After being featured in too many magazines to mention and having created an online stir, we know that ThemePixels is going to be big. We also hope to win Startup Fictional Business of the Year this year.</p>
+
+            <p style="color:#ffffff !important">Browse our site and see for yourself why you need SON Product Registration.</p>
+
+            <p style="color:#ffffff !important"><a href="" class="btn btn-outline-secondary pd-x-25" style="color:#ffffff !important">Learn More</a></p>
+
+            <p class="tx-12" style="color:#ffffff !important">&copy; Copyright 2019. All Rights Reserved.</p>
+        </div>
+    </div>
+
+    <div class="signin-right animated fadeInDown">
+
+        <div class="signin-box">
+            <div class="logo text-center">
+                <a href="#">
+                    <img src="~/VatebraAssets/images/sonproduct.png">
+                </a>
+            </div>
+
+            <h3 class="signin-title-secondary text-center">Sign in to Continue.</h3>
+            <section id="loginForm">
+                @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="form-group">
+                        <div mat-input-field id="email-mat-input-field" class="mat-input-field form-group margin-bottom-20px">
+                            <div class="label margin-bottom-5px font-weight-bold">Email:</div>
+                            <div>
+                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div mat-input-field id="password-mat-input-field" class="mat-input-field form-group margin-bottom-20px">
+                            <div class="label margin-bottom-5px font-weight-bold">Password:</div>
+                            <div>
+                                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" name="RememberMe" id="RememberMe">
+                                <label class="custom-control-label" for="RememberMe">Remember Me?</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" value="Log in" class="btn btn-success btn-block btn-signin" />
+                    </div>
+
+                    <p class="mg-b-0">
+                        @Html.ActionLink("Register as a new user", "register")
+                    </p>
+                    <p>
+                        Enable this once you have account confirmation enabled for password reset functionality
+                    </p> <p>
+                        @Html.ActionLink("Forgot your password?", "forgotpassword")
+                    </p>
+                }
+            </section>
+        </div>
+    </div>
+</div>

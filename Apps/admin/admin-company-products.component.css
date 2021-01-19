@@ -1,0 +1,215 @@
+﻿.company-products-component {}
+
+/* product details */
+
+.company-details-component {}
+
+.company-details-component .company-details-section {
+    background-color: #fff;
+    border-bottom: 1px solid #ced4da;
+    padding: 20px 0;
+    
+    position: fixed;
+    left: 230px;
+    top: 75px;
+    right: 0px;
+    border-right: 1px solid #ced4da;
+    transition: all .2s ease-in-out;
+    -ms-transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    -webkit-transition: all .2s ease-in-out;
+}
+
+.hide-sidebar .company-details-component .company-details-section {
+    background-color: #fff;
+    padding: 20px 0;
+    
+    position: fixed;
+    left: 0px;
+    top: 75px;
+    right: 0px;
+    border-right: 1px solid #ced4da;
+    transition: all .2s ease-in-out;
+    -ms-transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    -webkit-transition: all .2s ease-in-out;
+}
+
+.company-details-component .company-details-section .nav-back-button-container {
+    position: absolute;
+    top: 10px;
+    right: 0px;
+}
+
+.company-details-component .company-details-section .nav-back-button-container .nav-back-button {
+    margin-right: 15px;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+    transition: all .2s ease-in-out;
+    -ms-transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    -webkit-transition: all .2s ease-in-out;
+    border: 1px solid #ced4da;
+    flex-shrink: 0;
+}
+
+
+/*  */
+.company-details-component .company-details-product-listing-section {
+    position: fixed;
+    left: 230px;
+    top: 200px;
+    bottom: 0px;
+    width: 450px;
+    border-right: 1px solid #ced4da;
+    transition: all .2s ease-in-out;
+    -ms-transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    -webkit-transition: all .2s ease-in-out;
+}
+
+.hide-sidebar .company-details-component .company-details-product-listing-section {
+    left: 0px;
+    transition: all .2s ease-in-out;
+    -ms-transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    -webkit-transition: all .2s ease-in-out;
+}
+
+.company-details-component .company-details-product-listing-section .company-product-search-section {
+    background-color: #fff;
+    border-top: 1px solid #ced4da;
+    transition: all 0.2s ease-in-out;
+    flex-shrink: 0;
+}
+
+.company-details-component .company-details-product-listing-section .company-product-list-group-section {
+    outline: none;
+    position: absolute;
+    top: 93px;
+    left: 0px;
+    bottom: 0px;
+    right: 0px;
+    border-top: 1px solid #ced4da;
+    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+
+/*  */
+.company-details-component .product-brand-details-section {
+    position: fixed;
+    left: 680px;
+    top: 165px;
+    bottom: 0px;
+    right: 0px;
+    padding: 0px;
+    transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    -webkit-transition: all .2s ease-in-out;
+
+    background: #FFF;
+
+    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.hide-sidebar .company-details-component .product-brand-details-section {
+    left: 450px;
+    transition: all .2s ease-in-out;
+    -ms-transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    -webkit-transition: all .2s ease-in-out;
+}
+
+.company-details-component .product-brand-details-section .sidebar-nav-item:first-child .sidebar-nav-link {
+    border-top: 1px none #dee2e6 !important;
+}
+
+
+
+
+
+
+/*  */
+
+.company-details-component .product-brand-details-section .product-brand-details-stackable-view-section .stackable-view-panel-container {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    bottom: 0px;
+    right: 0px;
+    transition: all .2s ease-in-out;
+    -ms-transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    -webkit-transition: all .2s ease-in-out;
+    background: #FFF;
+}
+
+.company-details-component .product-brand-details-section .product-brand-details-stackable-view-section .stackable-view-panel-container .stackable-view-panel {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    bottom: 0px;
+    right: 0px;
+    z-index: 0;
+    visibility: hidden;
+    opacity: 0;
+    transition: all .2s ease-in-out;
+    -ms-transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    -webkit-transition: all .2s ease-in-out;
+    background: #FFF;
+    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.company-details-component .product-brand-details-section .product-brand-details-stackable-view-section .stackable-view-panel-container .active {
+    z-index: 10;
+    visibility: visible;
+    opacity: 1;
+    transition: all .2s ease-in-out;
+    -ms-transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    -webkit-transition: all .2s ease-in-out;
+}
+
+.company-details-component .product-brand-details-section .product-brand-details-stackable-view-section .stackable-view-panel-container > * .product-photo-item {
+    cursor: pointer;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+.company-details-component .product-brand-details-section .product-brand-details-stackable-view-section .stackable-view-panel-container > * .product-document-item {
+    cursor: pointer;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+.company-details-component .product-brand-details-section .product-brand-details-stackable-view-section .stackable-view-panel-container > * .product-document-item .header {
+    background: rgba(0,0,0,1) !important;
+    background: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,.0)) !important;
+    background: -moz-linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,.0)) !important;
+    background: -webkit-linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,.0)) !important;
+
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+
+    z-index: 1;
+    padding: 20px;
+
+    color: #FFF !important;
+}

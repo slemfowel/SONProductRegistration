@@ -1,0 +1,73 @@
+﻿@model SonProductRegistration.Web.Models.DTO.AssignAdminRole
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>AdminUser</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.AdminUser.UserId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AdminUser.UserId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AdminUser.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AdminUser.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AdminUser.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AdminUser.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AdminUser.MiddleName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AdminUser.MiddleName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AdminUser.PFNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AdminUser.PFNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AdminUser.DateCreated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AdminUser.DateCreated)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AdminUser.DateEdited)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AdminUser.DateEdited)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

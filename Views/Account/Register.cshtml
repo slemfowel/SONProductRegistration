@@ -1,0 +1,425 @@
+﻿@model SonProductRegistration.Web.Models.RegisterViewModel
+@{
+    /**/
+
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_auth.cshtml";
+}
+
+<div id="company-register-component" class="d-md-flex flex-row-reverse">
+    <div id="registration-form-container" class="signin-right">
+        <div id="company-registration-container" class="signin-box signup">
+
+            <div id="company-registration-form">
+                @*@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {*@
+                    @Html.AntiForgeryToken()
+
+                    @Html.ValidationSummary("", new { @class = "text-danger" })
+
+                <div class="mat-stackable-view bg-white pt-4 pb-4" id="registration-mat-stackable-view">
+                    <div panel-item class="panel-item active tin-verification-panel">
+                        <div id="tin-verification-form">
+                            <div class="margin-bottom-30px">
+                                <h2 class="signin-title-primary">Let's get you started</h2>
+                                <span>Enter your 11-digit Tax Identification Number below to continue.</span>
+                            </div>
+
+                            <div class="form-group w-100">
+                                <div mat-input-field id="tin-mat-input-field" class="mat-input-field form-group margin-bottom-10px">
+                                    <div class="label margin-bottom-5px font-weight-bold">Tax Identification Number:</div>
+                                    <div>
+                                        <input type="text" id="tax-identification-number" name="tax-identification-number" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button type="button" id="verify-tin-button" class="btn btn-primary btn-block btn-signin mg-b-10">
+                                <span>Continue</span>
+                                <i class="ion-arrow-right-a"></i>
+                            </button>
+
+                            <p class="mg-b-0">
+                                Already have an user account? @Html.ActionLink("Login", "login")
+                            </p>
+                        </div>
+                    </div>
+
+                    <div panel-item class="panel-item company-details-panel">
+                        <div id="company-details-form" class="panel-section margin-auto width-450px pb-5">
+                            <div class="margin-bottom-30px">
+                                <h4 class="font-weight-bolder text-dark">Company Details</h4>
+                                <span>Tell us about your company...</span>
+                            </div>
+
+                            <div>
+                                <div class="d-flex">
+                                    <div class="form-group w-100">
+                                        <div mat-input-field id="company-name-mat-input-field" class="mat-input-field form-group margin-bottom-10px">
+                                            <div class="label margin-bottom-5px font-weight-bold">Company Name:</div>
+                                            <div>
+                                                @Html.EditorFor(model => model.CompanyName, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.CompanyName, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex">
+                                    <div class="form-group w-100">
+                                        <div mat-input-field id="business-address-mat-input-field" class="mat-input-field form-group margin-bottom-10px">
+                                            <div class="label margin-bottom-5px font-weight-bold">Address:</div>
+                                            <div>
+                                                @Html.EditorFor(model => model.BusinessAddress, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.BusinessAddress, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex">
+                                    <div class="form-group w-100">
+                                        <div mat-input-field id="business-phone-number-mat-input-field" class="mat-input-field form-group margin-bottom-10px">
+                                            <div class="label margin-bottom-5px font-weight-bold">Ware House Address:</div>
+                                            <div>
+                                                @Html.EditorFor(model => model.WareHouseAddress, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.WareHouseAddress, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex">
+                                    <div class="form-group w-100 mr-2">
+                                        <div mat-input-field id="email-mat-input-field" class="mat-input-field form-group margin-bottom-10px">
+                                            <div class="label margin-bottom-5px font-weight-bold">Email Address:</div>
+                                            <div>
+                                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group w-100">
+                                        <div mat-input-field id="business-phone-number-mat-input-field" class="mat-input-field form-group margin-bottom-10px">
+                                            <div class="label margin-bottom-5px font-weight-bold">Phone Number:</div>
+                                            <div>
+                                                @Html.EditorFor(model => model.BusinessPhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.BusinessPhoneNumber, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex">
+                                    <div class="form-group w-100 mr-2">
+                                        <div mat-date-picker id="date-of-incorporation-mat-input-field" class="mat-date-picker form-group margin-bottom-10px">
+                                            <div class="label margin-bottom-5px font-weight-bold">Date of Incorporation:</div>
+                                            <div>
+                                                @Html.EditorFor(model => model.DateOfIncorporation, new { htmlAttributes = new { @id = "date-of-incorporation-date-picker", @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.DateOfIncorporation, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group w-100 mr-2">
+                                        <div mat-input-field id="cac-number-mat-input-field" class="mat-input-field form-group margin-bottom-10px">
+                                            <div class="label margin-bottom-5px font-weight-bold">CAC Number:</div>
+                                            <div>
+                                                @Html.EditorFor(model => model.CACNumber, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.CACNumber, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group w-100">
+                                        <div mat-input-field id="tin-mat-input-field" class="mat-input-field form-group margin-bottom-10px">
+                                            <div class="label margin-bottom-5px font-weight-bold">TIN:</div>
+                                            <div>
+                                                @Html.EditorFor(model => model.Tin, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.Tin, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex">
+                                    <div class="form-group w-100 mr-2">
+                                        <div mat-select-menu id="state-mat-input-field" class="mat-select-menu form-group margin-bottom-10px">
+                                            <div class="label margin-bottom-5px font-weight-bold">State:</div>
+                                            <div>
+                                                @Html.DropDownList("StateID", null, htmlAttributes: new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(model => model.StateID, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group w-100">
+                                        <div mat-select-menu id="lga-mat-input-field" class="mat-select-menu form-group margin-bottom-10px">
+                                            <div class="label margin-bottom-5px font-weight-bold">LGA:</div>
+                                            <div>
+                                                @Html.DropDownList("LGAID", null, htmlAttributes: new { @class = "form-control" })
+                                                @*@Html.ValidationMessageFor(model => model.LGAID, "", new { @class = "text-danger" })*@
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="overflow-hidden">
+                                <div class="float-right">
+                                    <button type="button" id="continue-to-coi-upload-button" class="btn btn-primary">
+                                        <span>Upload Certificate of Incorporation</span>
+                                        <i class="text-white fa fa-arrow-right"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div panel-item class="panel-item brand-document-uploads-panel">
+                        <div id="upload-certification-of-incorporation-form" class="panel-section margin-auto width-450px">
+                            <div class="margin-bottom-30px">
+                                <h4 class="font-weight-bolder text-dark">Upload Certificate of Incorporation</h4>
+                                <span>Please upload your certificate of incorporation document</span>
+                            </div>
+
+                            <div>
+                                <input type="hidden" id="CertificateOfIncorporationId" name="CertificateOfIncorporationId" />
+                                <div class="d-flex">
+                                    <div class="form-group w-100">
+                                        <div mat-upload-button
+                                             popover-title="What to upload"
+                                             id="certificate-of-incorporation-document-uploader"
+                                             upload-items="['Certificate of Incorporation Document']"
+                                             class="margin-bottom-50px mat-upload-button"
+                                             upload-url="/document/upload"
+                                             image-url="/image/productphoto/">
+                                            <div upload-button class="upload-button upload-item">
+                                                <div class="label">
+                                                    <div>Drag & Drop Files to Upload Here</div>
+                                                    <div>(300KB Max, JPG or PDF)</div>
+                                                    <div class="mt-2 mb-2">- Or -</div>
+                                                    <button class="mt-0 btn">Select from your computer</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="overflow-hidden mb-5">
+                                <div class="float-right">
+                                    <button type="button" id="back-to-company-details-button" class="btn btn-secondary">
+                                        <i class="text-white fa fa-arrow-left"></i>
+                                        <span>Back</span>
+                                    </button>
+                                    <button type="button" id="continue-to-contact-person-details-button" class="btn btn-primary">
+                                        <span>Continue to Contact Person</span>
+                                        <i class="text-white fa fa-arrow-right"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div panel-item class="panel-item contact-person-details-panel">
+                        <div id="contact-person-form" class="panel-section margin-auto width-450px pb-5">
+                            <div class="margin-bottom-30px">
+                                <h4 class="font-weight-bolder text-dark">Contact Person</h4>
+                                <span>Please provide your contact person's information...</span>
+                            </div>
+
+                            <div class="position-relative">
+
+                                <div class="d-flex">
+                                    <div class="form-group w-100">
+                                        <div mat-input-field id="contact-person-name-mat-input-field" class="mat-input-field form-group margin-bottom-10px">
+                                            <div class="label margin-bottom-5px font-weight-bold">Full Name:</div>
+                                            <div>
+                                                @Html.EditorFor(model => model.ContactPersonName, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.ContactPersonName, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex">
+                                    <div class="form-group w-100">
+                                        <div mat-input-field id="contact-person-email-mat-input-field" class="mat-input-field form-group margin-bottom-10px">
+                                            <div class="label margin-bottom-5px font-weight-bold">Email Address:</div>
+                                            <div>
+                                                @Html.EditorFor(model => model.ContactPersonEmail, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.ContactPersonEmail, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex">
+                                    <div class="form-group w-100">
+                                        <div mat-input-field id="contact-person-phone-number-mat-input-field" class="mat-input-field form-group margin-bottom-10px">
+                                            <div class="label margin-bottom-5px font-weight-bold">Phone Number:</div>
+                                            <div>
+                                                @Html.EditorFor(model => model.ContactPersonPhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.ContactPersonPhoneNumber, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="overflow-hidden mb-5">
+                                <div class="float-right">
+                                    <button type="button" id="back-to-coi-upload-button" class="btn btn-secondary">
+                                        <i class="text-white fa fa-arrow-left"></i>
+                                        <span>Back</span>
+                                    </button>
+                                    <button type="button" id="continue-to-choose-a-password-button" class="btn btn-primary">
+                                        <span>Continue to Choose a Password</span>
+                                        <i class="text-white fa fa-arrow-right"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div panel-item class="panel-item choose-password-panel">
+                        <div id="choose-password-form" class="panel-section margin-auto width-450px">
+                            <div class="margin-bottom-30px">
+                                <h4 class="font-weight-bolder text-dark">Choose a Password</h4>
+                                <span>You're almost there, choose a secured login password.</span>
+                            </div>
+
+                            <div>
+                                <div class="d-flex">
+                                    <div class="form-group w-100">
+                                        <div mat-input-field id="password-mat-input-field" class="mat-input-field form-group margin-bottom-10px">
+                                            <div class="label margin-bottom-5px font-weight-bold">Password:</div>
+                                            <div>
+                                                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex">
+                                    <div class="form-group w-100">
+                                        <div mat-input-field id="confirm-password-mat-input-field" class="mat-input-field form-group margin-bottom-10px">
+                                            <div class="label margin-bottom-5px font-weight-bold">Confirm Password:</div>
+                                            <div>
+                                                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="overflow-hidden mb-5">
+                                <div class="float-right">
+                                    <button type="button" id="back-to-contact-person-details-button" class="btn btn-secondary">
+                                        <i class="text-white fa fa-arrow-left"></i>
+                                        <span>Back</span>
+                                    </button>
+                                    <button type="button" id="submit-registration-button" class="btn btn-primary">
+                                        <span>Submit Registration</span>
+                                        <i class="text-white fa fa-arrow-right"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div panel-item class="panel-item brand-document-uploads-panel">
+                        <div class="panel-section margin-auto width-450px">
+                            <div class="margin-bottom-30px">
+                                <h4 class="font-weight-bolder text-dark">Successful!</h4>
+                                <span>Congratulations, your registration was successful. An email has been sent to your mailbox, kindly login to your mailbox to activate your account.</span>
+                            </div>
+
+                            <div>
+                            </div>
+
+                            <div class="overflow-hidden mb-5">
+                                <div class="float-right">
+                                    <button type="button" id="registration-complete-button" return-url="" class="btn btn-primary">
+                                        <span>Back to Login</span>
+                                        <i class="text-white fa fa-arrow-right"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                @*}*@
+            </div>
+        </div>
+    </div>
+
+    <div class="signin-left">
+        <div class="signin-box">
+            <h2 class="slim-logo"><a href="index.html">SON Product Registration<span>.</span></a></h2>
+
+            <p>We are excited to launch our new SON Product Registration. After being featured in too many magazines to mention and having created an online stir, we know that ThemePixels is going to be big. We also hope to win Startup Fictional Business of the Year this year.</p>
+
+            <p>Browse our site and see for yourself why you need SON Product Registration.</p>
+
+            <p><a href="" class="btn btn-outline-secondary pd-x-25">Learn More</a></p>
+
+            <p class="tx-12">&copy; Copyright 2019. All Rights Reserved.</p>
+        </div>
+    </div>
+</div>
+<script>
+                                                                                                            //function FireEvent() {
+                                                                                                            //    // GetModule();
+                                                                                                            //    GetTempModule();
+                                                                                                            //}
+
+                                                                                                            //function GetModule() {
+                                                                                                            //    var compCode = $("#Text1").val();
+
+
+                                                                                                            //    $.ajax({
+                                                                                                            //        type: 'GET',
+                                                                                                            //        url: "http://localhost/sonproductregistration.api/api/Check?TinOrCAC=" + compCode,
+                                                                                                            //        dataType: 'json',
+                                                                                                            //        success: function (data) {
+                                                                                                            //            console.log(data);
+                                                                                                            //            if (data.Status == false) {
+                                                                                                            //                alert("Tin Number not verified");
+                                                                                                            //                return;
+                                                                                                            //            }
+                                                                                                            //            else if (data.Message != null) {
+                                                                                                            //                alert("Company information already exist on our system Please contact the administrator");
+                                                                                                            //                return;
+                                                                                                            //            }
+
+                                                                                                            //            else {
+                                                                                                            //                $('#ContactPersonName').val(data.Company.ContactPersonName);
+                                                                                                            //                $('#ContactPersonPhoneNumber').val(data.Company.ContactPersonPhoneNumber);
+                                                                                                            //                $('#ContactPersonEmail').val(data.Company.ContactPersonEmail);
+                                                                                                            //                $('#BusinessPhoneNumber').val(data.Company.BusinessPhoneNumber);
+                                                                                                            //                $('#BusinessAddress').val(data.Company.BusinessAddress);
+                                                                                                            //                $('#DateOfIncorporation').val(data.Company.DateOfIncorporation);
+                                                                                                            //                $('#Tin').val(data.Company.Tin);
+                                                                                                            //                $('#WareHouseAddress').val(data.Company.WareHouseAddress);
+                                                                                                            //                $('#BusinessAddressLocationCode').val(data.Company.BusinessAddressLocationCode);
+                                                                                                            //                $('#CertificateOfIncorporationId').val(data.Company.CertificateOfIncorporationId);
+                                                                                                            //                $('#CompanyName').val(data.Company.CompanyName);
+                                                                                                            //                $('#CACNumber').val(data.Company.CACNumber);
+                                                                                                            //                document.getElementById("myform").setAttribute("style", "display:block");
+                                                                                                            //                document.getElementById("TinSelection").setAttribute("style", "display:none");
+
+                                                                                                            //            }
+
+
+                                                                                                            //            //end of current s
+                                                                                                            //        }
+                                                                                                            //    });
+                                                                                                            //}
+
+                                                                                                            //function GetTempModule() {
+                                                                                                            //    document.getElementById("myform").setAttribute("style", "display:block");
+                                                                                                            //    document.getElementById("TinSelection").setAttribute("style", "display:none");
+                                                                                                            //}
+</script>

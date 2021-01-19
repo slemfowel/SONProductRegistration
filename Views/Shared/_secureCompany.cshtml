@@ -1,0 +1,105 @@
+﻿@using System.Configuration;
+@{
+    var action = ViewData["Action"] as string;
+    var controller = ViewData["Controller"] as string;
+    var id = ViewData["Id"];
+
+    var sidebarState = "";
+    sidebarState = (action == "productdetails") ? "hide-sidebar" : "";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - </title>
+
+    <link href="~/son-vatebra.css" rel="stylesheet" />
+</head>
+<body class="@sidebarState">
+
+    <div class="vatebra-header with-sidebar">
+        <div class="container-fluid">
+            <div class="vatebra-header-left">
+                <h2 class="vatebra-logo"><a href="index.html">e-Product<span>.</span></a></h2>
+                @if ((action != "productdetails"))
+                {
+                    <a href="" id="vatebraSidebarMenu" class="vatebra-sidebar-menu"><span></span></a>
+                }
+                <div class="search-box">
+                    <input type="text" class="form-control" placeholder="Search">
+                    <button class="btn btn-primary"><i class="fa fa-search"></i></button>
+                </div>
+            </div>
+            <div class="vatebra-header-right">
+                <div class="dropdown dropdown-b" data-toggle="tooltip" title="Notifications">
+                    <a href="" class="header-notification" data-toggle="dropdown">
+                        <i class="icon ion-ios-bell-outline"></i>
+                        <span class="indicator"></span>
+                    </a>
+
+                </div>
+                <div class="dropdown dropdown-c">
+                    <a href="#" class="logged-user" data-toggle="dropdown">
+                        <img src="" alt="">
+                        <span>@Html.Partial("_secureAccountUserNamePartial")</span>
+                        <i class="fa fa-angle-down"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <nav class="nav">
+                            <a href="page-profile.html" class="nav-link"><i class="icon ion-person"></i> View Profile</a>
+                            <a href="page-edit-profile.html" class="nav-link"><i class="icon ion-compose"></i> Edit Profile</a>
+
+                            <a href="page-settings.html" class="nav-link"><i class="icon ion-ios-gear"></i> Account Settings</a>
+                            <a href="~/account/login" class="nav-link"><i class="icon ion-forward"></i> Sign Out</a>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="vatebra-body">
+        <div class="vatebra-sidebar">
+            <label class="sidebar-label">Navigation</label>
+            @Html.Partial("_secureCompanySidebarPartial")
+
+            <div class="vatebra-footer position-absolute absolute-left absolute-bottom absolute-right">
+                <div class="container">
+                    <p>&copy; 2019 e-Product :: SON</p>
+                    <!-- <p>Powered by: <a href="">VATEBRA</a></p> -->
+                </div>
+            </div>
+        </div>
+        <div class="vatebra-mainpanel son-pattern">
+            <div class="container">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+
+    <div class="page-loader" id="page-loader" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="controls-loader" large>
+                <div class="loader-wrappr">
+                    <div class="loadr-itm loader">
+                        <div class="loader-circle"></div>
+                        <div class="loader-line-mask">
+                            <div class="loader-line"></div>
+                        </div>
+                    </div>
+                    <div class="loadr-itm hint"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- son vatebra -->
+    <script>
+        var baseUrl = "@Html.Raw(ConfigurationManager.AppSettings["BaseUrl"].ToString())";
+    </script>
+    <script src="~/son-vatebra.js"></script>
+    <script src="~/chart.min.js"></script>
+
+</body>
+</html>

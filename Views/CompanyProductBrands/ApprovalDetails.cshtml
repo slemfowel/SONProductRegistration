@@ -1,0 +1,134 @@
+﻿@using SonProductRegistration.Web.CustomEnum;
+@using System.Collections;
+
+@model SonProductRegistration.Web.ViewModels.CompanyProductBrandViewModel
+
+@{
+    /**/
+
+    Layout = null;
+    var anonymouseBusinessTypeList = ViewBag.BusinessType;
+    ArrayList businessTypeList = new ArrayList();
+    foreach (var item in anonymouseBusinessTypeList)
+    {
+        businessTypeList.Add(item);
+    }
+
+    dynamic selectedBusinessType = businessTypeList[@Model.BusinessType];
+    var baseUrl = ViewBag.BaseUrl as string;
+
+}
+
+<div class="product-brand-details">
+    <ul class="nav nav-sidebar">
+        <li class="vatebra-accordion-nav-item with-sub">
+            <div class="d-flex vatebra-accordion-nav-link font-weight-bold text-20px height-60px">
+                <div class="w-50 mr-4 header-title">
+                    <i class="icon ion-cube float-left mr-3"></i>
+                    <span class="line-height-45px float-left">Brand Details</span>
+                </div>
+                <div class="w-50">
+                    <div class="float-right">
+                        <button id="schedule-for-inspection-button" data-product-id="@Model.CompanyProductID" data-return-url="@baseUrl/admin/approvalchecklist" class="btn btn-info btn-sm p-2">
+                            @*<i class="ion-ios-checkmark text-white text-20px float-left"></i>*@
+                            <span class="text-13px font-weight-bold float-left">Schedule for Inspection</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="stackable-view-panel-canvax bg-white" id="brand-details-tab">
+                <div class="brand-details-panel p-4">
+                    <div id="brand-details-section" class="mb-5 ml-4 mr-4">
+
+                        <div class="mb-3 d-flex">
+                            <div class="w-35 font-weight-normal text-secondary margin-right-3px">Brand Name:</div>
+                            <div class="w-75 text-dark pre-wrap">@Model.BrandName</div>
+                        </div>
+
+                        <div class="mb-3 d-flex">
+                            <div class="w-35 font-weight-normal text-secondary margin-right-3px">Product Full Description:</div>
+                            <div class="w-75 text-dark pre-wrap">@Model.ProductDescription</div>
+                        </div>
+
+                        @*<div class="mb-5 d-flex">
+                            <div class="w-35 font-weight-normal text-secondary margin-right-3px"></div>
+                            <div class="w-75">
+                                @{
+                                    var productPhoto = @ViewBag.BaseUrl + "/image/productphoto/" + @Model.ProductPhotoID;
+                                }
+                                <div id="" class="card width-300px height-300px border-0 shadow product-photo-item" style="background-image: url('@productPhoto');">
+                                    <div class="card-body"></div>
+                                </div>
+                            </div>
+                        </div>*@
+
+                        <div class="mb-3 d-flex">
+                            <div class="w-35 font-weight-normal text-secondary margin-right-3px">Major Product Components</div>
+                            <div class="w-75 text-dark pre-wrap">@Model.ProductComponent</div>
+                        </div>
+
+                        <div class="mb-3 d-flex">
+                            <div class="w-35 font-weight-normal text-secondary margin-right-3px">Warehouse/Factory Address</div>
+                            <div class="w-75 text-dark pre-wrap">@Model.FactoryAddress</div>
+                        </div>
+
+                        <div class="mb-3 d-flex">
+                            <div class="w-35 font-weight-normal text-secondary margin-right-3px">Packaging Specifications/Sizes</div>
+                            <div class="w-75 text-dark pre-wrap">@Model.PackagingSpecifications</div>
+                        </div>
+
+                        <div class="mb-3 d-flex">
+                            <div class="w-35 font-weight-normal text-secondary margin-right-3px">Type of Business:</div>
+                            <div class="w-75 text-dark pre-wrap">@selectedBusinessType.GetType().GetProperty("Title").GetValue(selectedBusinessType, null)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li class="vatebra-accordion-nav-item with-sub">
+            <div class="d-flex vatebra-accordion-nav-link font-weight-bold text-20px height-60px">
+                <div class="w-50 mr-4 header-title">
+                    <i class="icon ion-document-text float-left mr-3"></i>
+                    <span class="line-height-45px float-left">Documents</span>
+                </div>
+            </div>
+            <div class="stackable-view-panel-canvax bg-white" id="brand-details-tab">
+                <div class="brand-details-panel p-4">
+                    <div id="brand-details-section" class="mb-5 ml-4 mr-4">
+                        <div class="d-flex flex-wrap">
+                            @foreach (var item in @Model.Documents)
+                            {
+                                var productDocument = @ViewBag.BaseUrl + "/image/productphoto/" + item.DocumentID;
+                                <div class="card border-0 height-400px mr-3 mb-3 width-320px product-document-item" product-document-item style="background-image: url('@productDocument');">
+                                    <div class="width-100px bg-secondary"></div>
+                                    <div class="card-body shadow border-1 border-secondary rounded">
+                                        <div class="header">
+                                            <h5 class="card-title- mb-2">@item.Description</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+        @*<li class="vatebra-accordion-nav-item with-sub">
+            <div class="d-flex vatebra-accordion-nav-link font-weight-bold text-20px height-60px">
+                <div class="w-50 mr-4 header-title">
+                    <i class="icon ion-card float-left mr-3"></i>
+                    <span class="line-height-45px float-left">Payment Details</span>
+                </div>
+            </div>
+            <div class="stackable-view-panel-canvax bg-white" id="brand-details-tab">
+                <div class="brand-details-panel p-4">
+                    <div id="brand-details-section" class="mb-5 ml-4 mr-4">
+                        <div class="d-flex flex-wrap">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>*@
+    </ul>
+</div>

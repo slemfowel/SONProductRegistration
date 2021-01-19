@@ -1,0 +1,29 @@
+﻿@model SonProductRegistration.Web.Models.CompanyProductInspection
+
+<div id="createoredit-product-inspection-schedule-component" class="width-600px mt-4" data-product-id="@Html.Raw(ViewBag.CompanyProductID)">
+    @using (Html.BeginForm("create", "users", FormMethod.Post, new { id = "createoredit-product-inspection-schedule-form" }))
+    {
+        @Html.AntiForgeryToken()
+
+    <div class="width-300px margin-auto">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        
+
+        <div mat-select-menu class="w-100 mr-2 mat-select-menu form-group">
+            <div class="label margin-bottom-5px font-weight-bold">Choose a Field Inspector:</div>
+            <div class="w-100">
+                @Html.DropDownList("InspectorID", ViewBag.UserId as SelectList, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.InspectorID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div mat-date-picker class="w-100 mr-2 mat-date-picker form-group">
+            <div class="label margin-bottom-5px font-weight-bold">Expected Date of Inspection:</div>
+            <div class="w-100">
+                <input type="text" class="form-control" id="expected-inspection-date-picker" placeholder="">
+                @Html.ValidationMessageFor(model => model.InspectorID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    }
+</div>

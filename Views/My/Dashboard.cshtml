@@ -1,0 +1,208 @@
+﻿@model SonProductRegistration.Web.ViewModels.DashboardViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_secureCompany.cshtml";
+}
+
+<div id="company-dashboard-component">
+
+    <div class="vatebra-pageheader">
+        <ol class="breadcrumb vatebra-breadcrumb text-white">
+            <li class="breadcrumb-item text-white"></li>
+            <li class="breadcrumb-item text-white font-weight-bold" aria-current="page">Dashboard</li>
+        </ol>
+        <h2 class="vatebra-pagetitle text-uppercase text-white text-shadow-sm">Welcome back, @Html.Partial("_secureAccountUserNamePartial")</h2>
+    </div>
+
+    <div class="row row-xs d-flex">
+        <div class="col-sm-6 col-lg-3">
+            <div class="card card-status bg-purple text-white border-0 shadow-lg">
+                <div class="media">
+                    <i class="icon ion-thumbsup"></i>
+                    <div class="media-body">
+                        <h1 class="text-white">@Model.TotalApplicationApproved</h1>
+                        <p>Total  Application Approved</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-lg-3 mg-t-10 mg-sm-t-0">
+            <div class="card card-status bg-teal text-white border-0 shadow-lg">
+                <div class="media">
+                    <i class="icon ion-thumbsdown"></i>
+                    <div class="media-body">
+                        <h1 class="text-white" id="registredProductCount">@Model.TotalApplicationDecline</h1>
+                        <p>Total Application Decline </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-lg-3 mg-t-10 mg-lg-t-0">
+            <div class="card card-status bg-white border-0 shadow-lg">
+                <div class="media tx-primary">
+                    <i class="icon ion-android-hand tx-primary"></i>
+                    <div class="media-body">
+                        <h1 class="tx-primary">@Model.TotalAwaitingPayment</h1>
+                        <p>Total Awaiting Payment</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-lg-3 mg-t-10 mg-lg-t-0">
+            <div class="card card-status bg-pink text-white border-0 shadow-lg">
+                <div class="media">
+                    <i class="icon ion-ios-analytics-outline"></i>
+                    <div class="media-body">
+                        <h1 class="text-white">@Model.TotalInProgress</h1>
+                        <p>Total InProgress</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="dropdown-divider mt-3 mb-3"></div>
+
+    <div class="mt-3 d-flex">
+        <div class="w-50 mr-2 p-0">
+            <div class="card shadow-lg mb-3 height-400px">
+                <div class="card-body">
+                    <h5 class="card-title">Product Analytics</h5>
+                    <canvas id="myChart"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="w-50 ml-2 p-0">
+            <div class="card shadow-lg height-400px">
+                <div class="card-body">
+                    <div class="d-flex">
+                        <div class="w-50">
+                            <h5 class="card-title mb-5">
+                                <i class="float-left mr-2 icon ion-cube text-30px"></i>
+                                <span class="float-left line-height-35px">My Products</span>
+                            </h5>
+                        </div>
+                        <div class="w-50">
+                            <div class="float-right">
+                                <button id="dashboard-new-registration-button" class="btn btn-primary">
+                                    <i class="fa fa-plus"></i>
+                                    <span>New Registration</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Pending</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="messages-tab" data-toggle="tab" href="#messages" role="tab" aria-controls="messages" aria-selected="false">In Progress</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="settings-tab" data-toggle="tab" href="#settings" role="tab" aria-controls="settings" aria-selected="false">Approved</a>
+                            </li>
+                        </ul>
+
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" class="width-20px">#</th>
+                                            <th scope="col">Product Name</th>
+                                            <th scope="col" class="width-150px">Reg. Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{
+                                            var pendingCounter = 1;
+                                        }
+                                        @foreach (var item in Model.PendingApplications)
+                                        {
+                                            <tr class="cursor-pointer">
+                                                <th scope="row">
+                                                    @pendingCounter
+                                                </th>
+                                                <td>
+                                                    <div>@item.ProductName</div>
+                                                    <small>Reg. #: @item.ReferenceNumber</small>
+                                                </td>
+                                                <td>@item.Company.CompanyName</td>
+                                            </tr>
+                                            pendingCounter += 1;
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="tab-pane" id="messages" role="tabpanel" aria-labelledby="messages-tab">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" class="width-20px">#</th>
+                                            <th scope="col">Product Name</th>
+                                            <th scope="col" class="width-150px">Reg. Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{
+                                            var inProgressCounter = 1;
+                                        }
+                                        @foreach (var item in Model.PendingApplications)
+                                        {
+                                            <tr class="cursor-pointer">
+                                                <th scope="row">
+                                                    @inProgressCounter
+                                                </th>
+                                                <td>
+                                                    <div>@item.ProductName</div>
+                                                    <small>Reg. #: @item.ReferenceNumber</small>
+                                                </td>
+                                                <td>@item.Company.CompanyName</td>
+                                            </tr>
+                                            inProgressCounter += 1;
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="tab-pane" id="settings" role="tabpanel" aria-labelledby="settings-tab">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" class="width-20px">#</th>
+                                            <th scope="col">Product Name</th>
+                                            <th scope="col" class="width-150px">Reg. Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{
+                                            var approvedCounter = 1;
+                                        }
+                                        @foreach (var item in Model.ApprovedProducts)
+                                        {
+                                            <tr class="cursor-pointer">
+                                                <th scope="row">
+                                                    @approvedCounter
+                                                </th>
+                                                <td>
+                                                    <div>@item.ProductName</div>
+                                                    <small>Reg. #: @item.ReferenceNumber</small>
+                                                </td>
+                                                <td>@item.ApprovalDate</td>
+                                            </tr>
+                                            inProgressCounter += 1;
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>

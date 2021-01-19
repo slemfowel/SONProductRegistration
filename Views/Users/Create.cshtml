@@ -1,0 +1,61 @@
+﻿@model SonProductRegistration.Web.ViewModels.AdminUserViewModel
+
+<div id="createoredit-user-component" class="width-500px mt-4">
+    @using (Html.BeginForm("create", "users", FormMethod.Post, new { id = "createoredit-user-form" }))
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="d-flex">
+            <div mat-input-field class="w-50 mr-2 mat-input-field form-group">
+                <div class="label margin-bottom-5px font-weight-bold">First Name:</div>
+                <div class="w-100">
+                    @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div mat-input-field class="w-50 ml-2 mat-input-field form-group">
+                <div class="label margin-bottom-5px font-weight-bold">Last Name:</div>
+                <div class="w-100">
+                    @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div mat-input-field class="mat-input-field form-group">
+            <div class="label margin-bottom-5px font-weight-bold">PF Number:</div>
+            <div class="w-100">
+                @Html.EditorFor(model => model.PFNumber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PFNumber, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div mat-input-field class="mat-input-field form-group">
+            <div class="label margin-bottom-5px font-weight-bold">Email:</div>
+            <div class="w-100">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div mat-input-field class="mat-input-field form-group">
+            <div class="label margin-bottom-5px font-weight-bold">Phone Number:</div>
+            <div class="w-100">
+                @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div mat-select-menu class="mat-select-menu form-group">
+            <div class="label margin-bottom-5px font-weight-bold">Role:</div>
+            <div class="w-100">
+                @Html.DropDownList("RoleId", ViewBag.RoleId as SelectList, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.RoleId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    }
+</div>
+

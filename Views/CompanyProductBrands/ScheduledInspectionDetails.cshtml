@@ -1,0 +1,222 @@
+﻿@using SonProductRegistration.Web.CustomEnum;
+@using System.Collections;
+
+@model SonProductRegistration.Web.ViewModels.CompanyProductBrandInspectedViewModel
+
+@{
+    /**/
+
+    Layout = null;
+    var anonymouseBusinessTypeList = ViewBag.BusinessType;
+    ArrayList businessTypeList = new ArrayList();
+    foreach (var item in anonymouseBusinessTypeList)
+    {
+        businessTypeList.Add(item);
+    }
+
+    dynamic selectedBusinessType = businessTypeList[@Model.BusinessType];
+    var baseUrl = ViewBag.BaseUrl as string;
+
+}
+
+<div class="product-brand-details">
+    <ul class="nav nav-sidebar">
+        <li class="vatebra-accordion-nav-item with-sub">
+            <div class="vatebra-accordion-nav-link font-weight-bold text-20px height-60px">
+                <div class="w-50 mr-4 header-title">
+                    <i class="icon ion-cube float-left mr-3"></i>
+                    <span class="line-height-45px float-left">Brand Details</span>
+                </div>
+                <div class="w-50">
+                    <div class="float-right">
+                        <button id="confirm-inspection-button" data-product-id="@Model.CompanyProductID" data-return-url="@baseUrl/admin/pendingproducts" class="btn btn-primary btn-sm p-2">
+                            @*<i class="ion-ios-checkmark text-white float-left height-20px line-height-20px"></i>*@
+                            <span class="text-13px font-weight-bold float-left height-20px line-height-20px">Confirm Inspection</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="stackable-view-panel-canvax bg-white" id="brand-details-tab">
+                <div class="brand-details-panel p-4">
+                    <div id="brand-details-section" class="mb-5 ml-4 mr-4">
+
+                        <div class="mb-3 d-flex">
+                            <div class="w-35 font-weight-normal text-secondary margin-right-3px">Brand Name:</div>
+                            <div class="w-75 text-dark">@Model.BrandName</div>
+                        </div>
+
+                        <div class="mb-3 d-flex">
+                            <div class="w-35 font-weight-normal text-secondary margin-right-3px">Product Full Description:</div>
+                            <div class="w-75 text-dark">@Model.ProductDescription</div>
+                        </div>
+
+                        <div class="mb-3 d-flex">
+                            <div class="w-35 font-weight-normal text-secondary margin-right-3px">Major Product Components</div>
+                            <div class="w-75 text-dark">@Model.ProductComponent</div>
+                        </div>
+
+                        <div class="mb-3 d-flex">
+                            <div class="w-35 font-weight-normal text-secondary margin-right-3px">Warehouse/Factory Address</div>
+                            <div class="w-75 text-dark">@Model.FactoryAddress</div>
+                        </div>
+
+                        <div class="mb-3 d-flex">
+                            <div class="w-35 font-weight-normal text-secondary margin-right-3px">Packaging Specifications/Sizes</div>
+                            <div class="w-75 text-dark">@Model.PackagingSpecifications</div>
+                        </div>
+
+                        <div class="mb-3 d-flex">
+                            <div class="w-35 font-weight-normal text-secondary margin-right-3px">Type of Business:</div>
+                            <div class="w-75 text-dark">@selectedBusinessType.GetType().GetProperty("Title").GetValue(selectedBusinessType, null)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li class="vatebra-accordion-nav-item with-sub">
+            <div class="d-flex vatebra-accordion-nav-link font-weight-bold text-20px height-60px">
+                <div class="w-50 mr-4 header-title">
+                    <i class="icon ion-document-text float-left mr-3"></i>
+                    <span class="line-height-45px float-left">Documents Uploaded</span>
+                </div>
+            </div>
+            <div class="stackable-view-panel-canvax bg-white" id="brand-details-tab">
+                <div class="brand-details-panel p-4">
+                    <div id="brand-details-section" class="mb-5 ml-4 mr-4">
+                        <div class="d-flex flex-wrap">
+                            @foreach (var item in @Model.Documents)
+                            {
+                                var productDocument = @ViewBag.BaseUrl + "/image/productphoto/" + item.DocumentID;
+                                <div class="card border-0 height-200px mr-3 mb-3 width-160px product-document-item" product-document-item style="background-image: url('@productDocument');">
+                                    <div class="width-100px bg-secondary"></div>
+                                    <div class="card-body shadow border-1 border-secondary rounded">
+                                        <div class="header">
+                                            <div class="card-title- mb-2">@item.Description</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        @*<li class="vatebra-accordion-nav-item with-sub">
+            <div class="d-flex vatebra-accordion-nav-link font-weight-bold text-20px height-60px">
+                <div class="w-50 mr-4 header-title">
+                    <i class="icon ion-card float-left mr-3"></i>
+                    <span class="line-height-45px float-left">Payment Details:</span>
+                </div>
+            </div>
+            <div class="stackable-view-panel-canvax bg-white" id="brand-details-tab">
+                <div class="brand-details-panel p-4">
+                    <div id="brand-details-section" class="mb-5 ml-4 mr-4">
+                        <div class="d-flex flex-wrap">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>*@
+
+        <li class="vatebra-accordion-nav-item with-sub">
+            <div class="d-flex vatebra-accordion-nav-link font-weight-bold text-20px height-60px">
+                <div class="w-50 mr-4 header-title">
+                    <i class="icon ion-clipboard float-left mr-3"></i>
+                    <span class="line-height-45px float-left">Inspection Details:</span>
+                </div>
+            </div>
+            <div class="stackable-view-panel-canvax bg-white" id="brand-details-tab">
+                <div class="brand-details-panel p-4">
+                    <div id="brand-details-section" class="mb-5 ml-4 mr-4">
+                        <div class="mb-3 d-flex">
+                            <div class="w-35 font-weight-normal text-secondary margin-right-3px">Date of Inspection:</div>
+                            <div class="w-75 text-dark">@Model.DateOfInspection</div>
+                        </div>
+
+                        <div class="mb-3 d-flex">
+                            <div class="w-35 font-weight-normal text-secondary margin-right-3px">Purpose of Inspection:</div>
+                            <div class="w-75 text-dark">@Model.DateOfInspection</div>
+                        </div>
+
+                        <div class="mb-3 d-flex">
+                            <div class="w-35 font-weight-normal text-secondary margin-right-3px">Nature of Product:</div>
+                            <div class="w-75 text-dark">@Model.DateOfInspection</div>
+                        </div>
+
+                        <div class="mb-3 d-flex">
+                            <div class="w-35 font-weight-normal text-secondary margin-right-3px">Status:</div>
+                            <div class="w-75 text-dark">@(((ProductInspectionStatus)Model.InspectionStatus).GetDescription())</div>
+                        </div>
+
+                        <div class="mt-3">
+                            <div class="mb-3">
+                                <div class="font-weight-bolder table-striped">Assigned Officers</div>
+                            </div>
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Name</th>
+                                        <th>Rank/Designation</th>
+                                        <th>Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>Mark</td>
+                                        <td>Otto</td>
+                                        <td>mdo</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">2</th>
+                                        <td>Jacob</td>
+                                        <td>Thornton</td>
+                                        <td>fat</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">3</th>
+                                        <td>Larry</td>
+                                        <td>the Bird</td>
+                                        <td>twitter</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <li class="vatebra-accordion-nav-item with-sub">
+            <div class="d-flex vatebra-accordion-nav-link font-weight-bold text-20px height-60px">
+                <div class="w-50 mr-4 header-title">
+                    <i class="icon ion-information-circled float-left mr-3"></i>
+                    <span class="line-height-45px float-left">Company Contact Person:</span>
+                </div>
+            </div>
+            <div class="stackable-view-panel-canvax bg-white" id="brand-details-tab">
+                <div class="brand-details-panel p-4">
+                    <div id="brand-details-section" class="mb-5 ml-4 mr-4">
+                        <div class="mb-3 d-flex">
+                            <div class="w-35 font-weight-normal text-secondary margin-right-3px">Name of Staff:</div>
+                            <div class="w-75 text-dark">@Model.InspectorFirstName @Model.CompanyProductID</div>
+                        </div>
+
+                        <div class="mb-3 d-flex">
+                            <div class="w-35 font-weight-normal text-secondary margin-right-3px">Phone Number:</div>
+                            <div class="w-75 text-dark">@Model.DateOfInspection</div>
+                        </div>
+
+                        <div class="mb-3 d-flex">
+                            <div class="w-35 font-weight-normal text-secondary margin-right-3px">Email Address:</div>
+                            <div class="w-75 text-dark">@Model.CommentAndReview</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>

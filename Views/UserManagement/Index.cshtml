@@ -1,0 +1,55 @@
+﻿
+
+@{
+    ViewBag.Title = "Users Management";
+   Layout = "~/Views/Shared/_secure.cshtml";
+
+   
+}
+
+<div class="vatebra-pageheader">
+    <ol class="breadcrumb vatebra-breadcrumb">
+        <li class="breadcrumb-item"><a href="#">@ViewBag.Title</a></li>
+        <li class="breadcrumb-item text-white active" aria-current="page">Dashboard</li>
+    </ol>
+    <h6 class="vatebra-pagetitle text-uppercase">Users Management</h6>
+</div>
+<div id="user-management-component">
+ <div class="section-wrapper">
+    <table class="vatebra-datagridview table table-striped table-bordered" id="UsersWithRoles">
+        <thead class="thead-colored bg-success">
+            <tr>
+                <th><b>Username</b></th>
+                <th><b>Email</b></th>
+                <th><b>Roles</b></th>
+                <th><b>UpdateRole</b></th>
+            </tr>
+        </thead>
+
+    </table>
+    <button onclick="myfunction()"> Click</button>
+</div>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+        
+            <div class="modal-content">
+                <div class="modal-header">
+                     <h5 class="modal-title">Create User Management</h5>
+                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        
+                        <span aria-hidden="true">&times;</span>
+
+
+                    </button>
+                    
+                </div>
+                <div class="modal-body" id="myModalContent">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Apps/user-management/user-management.component.js"></script>

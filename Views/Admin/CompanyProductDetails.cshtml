@@ -1,0 +1,77 @@
+﻿@model SonProductRegistration.Web.ViewModels.CompanyProductViewModel
+
+<div class="p-4">
+    <div class=" product-details-section mb-3 p-3 bg-light">
+        <div class="d-flex">
+            <div class="mb-2 mr-2 w-50">
+                <span class="font-weight-normal">Reference #:</span>
+                <h6 class="font-weight-bold text-13px text-uppercase">@Model.ReferenceNumber</h6>
+            </div>
+            <div class="mb-2 ml-2 mr-2 w-50">
+                <span class="font-weight-normal">Product Category:</span>
+                <h6 class="font-weight-bold text-13px text-uppercase">@Model.ProductCategoryDescription</h6>
+            </div>
+        </div>
+        <div class="d-flex">
+            <div class="mb-2 mr-2 w-50">
+                <span class="font-weight-normal">Product Name:</span>
+                <h6 class="font-weight-bold text-13px text-uppercase">@Model.ProductName</h6>
+            </div>
+            <div class="mb-2 ml-2 mr-2 w-50">
+                <span class="font-weight-normal">Product Category:</span>
+                <h6 class="font-weight-bold text-13px text-uppercase">@Model.ProductCategoryDescription</h6>
+            </div>
+            <div class="mb-2 ml-2 mr-2 w-50">
+                <span class="font-weight-normal">Product Type:</span>
+                <h6 class="font-weight-bold text-13px text-uppercase">@Model.ProductTypeDescription</h6>
+            </div>
+            <div class="mb-2 ml-2 w-50">
+                <span class="font-weight-normal">Service Charge:</span>
+                <h6 class="font-weight-bold text-13px text-uppercase">NGN @Model.ServiceCharge</h6>
+            </div>
+        </div>
+    </div>
+
+    <div class="d-flex mt-5">
+        <div class="w-100">
+            <div class="p-2 overflow-hidden mb-3">
+                <div class="width-30px height-30px float-left ion-social-buffer text-25px"></div>
+                <div><h5 class="line-height-30px m-0 float-left pt-1">Brand Listings</h5></div>
+            </div>
+            <div id="company-product-brand-list-group" class="company-product-list-group-section list-group list-group-flush">
+                @if (Model.CompanyProductBrands.Count > 0)
+                {
+                    var counter = 0;
+                    var rowNumber = 1;
+                    foreach (var companyProduct in Model.CompanyProductBrands)
+                    {
+                        var active = (counter <= 0) ? "active" : "";
+                        <a data-product-id="@companyProduct.CompanyProductID" list-group-item class="d-flex list-group-item list-group-item-action cursor-pointer align-items-start shadow-sm @active">
+                            <div class="min-width-20px mr-2">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h6 class="font-weight-bold mb-1">@rowNumber.</h6>
+                                </div>
+                            </div>
+                            <div class="width-150px height-90px">
+                                <div class="w-80 justify-content-between"></div>
+                            </div>
+                            <div class="w-100">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h6 class="font-weight-bold mb-1">@companyProduct.BrandName</h6>
+                                </div>
+                                <div class="max-height-30px overflow-hidden">
+                                    <p class="mb-1">@companyProduct.ProductDescription</p>
+                                </div>
+                            </div>
+                            <div class="w-50">
+
+                            </div>
+                        </a>
+                        counter += 1;
+                        rowNumber += 1;
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</div>

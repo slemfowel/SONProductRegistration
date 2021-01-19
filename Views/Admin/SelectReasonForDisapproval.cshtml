@@ -1,0 +1,61 @@
+﻿@model SonProductRegistration.Web.Models.CompanyProductInspection
+
+<div id="createoredit-product-disapproval-component" class="width-400px mt-4" data-product-id="@Html.Raw(ViewBag.CompanyProductID)">
+    @using (Html.BeginForm("create", "users", FormMethod.Post, new { id = "createoredit-product-disapproval-form" }))
+    {
+        @Html.AntiForgeryToken()
+
+    <div class="width-400px margin-auto">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="custom-control custom-radio mb-3">
+            <div class="cursor-pointer">
+                <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
+                <label class="custom-control-label text-dark font-weight-bold cursor-pointer" for="customRadio1">Sexual Content</label>
+            </div>
+            <div>Devices that are currently signed in or have been active in your account in the last 28 days</div>
+        </div>
+
+        <div class="custom-control custom-radio mb-3">
+            <div class="cursor-pointer">
+                <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
+                <label class="custom-control-label text-dark font-weight-bold cursor-pointer" for="customRadio2">Violent or Repulsive Content</label>
+            </div>
+            <div>Devices that are currently signed in or have been active in your account in the last 28 days</div>
+        </div>
+
+        <div class="custom-control custom-radio mb-3">
+            <div class="cursor-pointer">
+                <input type="radio" id="customRadio3" name="customRadio" class="custom-control-input">
+                <label class="custom-control-label text-dark font-weight-bold cursor-pointer" for="customRadio3">Hateful or Abusive Content</label>
+            </div>
+            <div>Devices that are currently signed in or have been active in your account in the last 28 days</div>
+        </div>
+
+        <div class="custom-control custom-radio mb-3">
+            <div class="cursor-pointer">
+                <input type="radio" id="customRadio4" name="customRadio" class="custom-control-input">
+                <label class="custom-control-label text-dark font-weight-bold cursor-pointer" for="customRadio4">Harmful Dangerous Act</label>
+            </div>
+            <div>Devices that are currently signed in or have been active in your account in the last 28 days</div>
+        </div>
+
+        <div class="custom-control custom-radio mb-3">
+            <div class="cursor-pointer">
+                <input type="radio" id="customRadio5" name="customRadio" class="custom-control-input">
+                <label class="custom-control-label text-dark font-weight-bold cursor-pointer" for="customRadio5">Child Abuse</label>
+            </div>
+            <div>Devices that are currently signed in or have been active in your account in the last 28 days</div>
+        </div>
+
+        <div class="custom-control custom-radio mb-3">
+            <div class="cursor-pointer">
+                <input type="radio" id="customRadio5" name="customRadio" class="custom-control-input">
+                <label class="custom-control-label text-dark font-weight-bold cursor-pointer" for="customRadio5">Promotes Terrorism</label>
+            </div>
+            <div>Devices that are currently signed in or have been active in your account in the last 28 days</div>
+        </div>
+
+    </div>
+    }
+</div>

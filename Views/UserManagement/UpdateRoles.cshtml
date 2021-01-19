@@ -1,0 +1,51 @@
+﻿
+@model IEnumerable<SonProductRegistration.Web.Models.AspNetRole>
+<div id="create-user-row-modal">
+    <!-- <p>
+        @Html.ActionLink("Create New", "Create")
+    </p> -->
+    <table class="table table-striped">
+          <thead class="thead-colored bg-success">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th></th>
+        </tr>
+</thead>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+
+                    @{var check = item.AspNetUsers.Where(x => x.Id == ViewBag.staff).FirstOrDefault();}
+
+                    @if (check != null)
+                    {
+                        <p>User in Currently in Role.</p>
+                    }
+                    else
+                    {
+                        <p>User Not in Role Click To Add</p>
+                        <button id="save-user-row-button" data-name="@item.Name" data-staff-id="@ViewBag.staff" class="btn btn-secondary btn-block mg-b-10"><i class="fa fa-paper-plane mg-r-5"></i> Click me</button>
+                    }
+                    <script>
+                    </script>
+
+
+
+
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+
+@section scripts{
+
+
+}

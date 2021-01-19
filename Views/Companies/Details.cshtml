@@ -1,0 +1,163 @@
+﻿@model SonProductRegistration.Web.Models.Company
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Company</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.UserId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CompanyName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CompanyName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ContactPersonName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContactPersonName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ContactPersonPhoneNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContactPersonPhoneNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ContactPersonEmail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContactPersonEmail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BusinessPhoneNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BusinessPhoneNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BusinessAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BusinessAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateOfIncorporation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateOfIncorporation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tin)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CACNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CACNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WareHouseAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WareHouseAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BusinessAddressLocationCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BusinessAddressLocationCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CertificateOfIncorporationId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CertificateOfIncorporationId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateCreated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateCreated)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateLastModified)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateLastModified)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LGA.LGAName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LGA.LGAName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.State.StateName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.State.StateName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

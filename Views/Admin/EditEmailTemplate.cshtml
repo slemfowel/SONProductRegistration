@@ -1,0 +1,34 @@
+﻿@model SonProductRegistration.Web.Models.EmailTemplate
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<div id="createoredit-email-template-component" class="width-700px mt-3">
+    @using (Html.BeginForm("editemailtemplate", "admin", FormMethod.Post, new { id = "createoredit-email-template-form" }))
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        @Html.HiddenFor(model => model.EmailTemplateID)
+
+        <div mat-select-menu class="mat-select-menu form-group">
+            <div class="label margin-bottom-5px font-weight-bold">Module:</div>
+            <div class="w-100">
+                @Html.DropDownList("Module", ViewBag.Module as SelectList, htmlAttributes: new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div mat-input-field class="mat-input-field form-group">
+            <div class="label margin-bottom-5px font-weight-bold">Subject:</div>
+            <div class="w-100">
+                @Html.EditorFor(model => model.Subject, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Subject, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="summernote">@Html.Raw(Model.Body)</div>
+
+    }
+</div>

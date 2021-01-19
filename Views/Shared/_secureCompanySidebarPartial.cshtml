@@ -1,0 +1,46 @@
+﻿@{
+    var controller = ViewBag.Controller.ToLower();
+    var action = ViewBag.Action.ToLower();
+    var id = ViewBag.Id;
+
+    var toggleProductStateStyle = "";
+    if (controller == "my")
+    {
+        toggleProductStateStyle = "style='display:block'";
+    }
+
+}
+<ul class="nav nav-sidebar">
+    <li class="sidebar-nav-item">
+        <a href="~/my/dashboard" class="sidebar-nav-link @Html.Raw(((controller == "my") && (action == "dashboard")) ? "active shadow" : "")"><i class="icon ion-ios-home"></i>Dashboard</a>
+    </li>
+
+    <li class="sidebar-nav-item with-sub">
+        <a href="" class="sidebar-nav-link"><i class="icon ion-cube"></i>My Products</a>
+        <ul class="nav sidebar-nav-sub" @Html.Raw(toggleProductStateStyle)>
+            <li class="nav-sub-item">
+                <a href="~/my/products" class="nav-sub-link @Html.Raw(((controller == "my") && (action == "products")) ? "active shadow" : "")">Registered Products</a>
+            </li>
+            <li class="nav-sub-item">
+                <a href="~/my/dueforrenewal" class="nav-sub-link @Html.Raw(((controller == "my") && (action == "dueforrenewal")) ? "active shadow" : "")">Products Due for Renewal</a>
+            </li>
+        </ul>
+    </li>
+
+    @*<li class="sidebar-nav-item">
+            <a href="~/my/reports" class="sidebar-nav-link @Html.Raw(((controller == "my") && (action == "reports")) ? "active shadow" : "")"><i class="icon ion-ios-folder"></i>Reports</a>
+        </li>*@
+
+    <li class="sidebar-nav-item">
+        <a href="~/my/notifications" class="sidebar-nav-link @Html.Raw(((controller == "my") && (action == "notifications")) ? "active shadow" : "")"><i class="icon ion-ios-bell"></i>Notifications</a>
+    </li>
+
+    <li class="sidebar-nav-item">
+        <a href="~/my/profile" class="sidebar-nav-link @Html.Raw(((controller == "my") && (action == "profile")) ? "active shadow" : "")"><i class="icon ion-ios-contact"></i>Profile</a>
+    </li>
+
+    @*<li class="sidebar-nav-item">
+            <a href="~/my/settings" class="sidebar-nav-link @Html.Raw(((controller == "my") && (action == "settings")) ? "active shadow" : "")"><i class="icon ion-ios-gear"></i>Account Settings</a>
+        </li>*@
+
+</ul>

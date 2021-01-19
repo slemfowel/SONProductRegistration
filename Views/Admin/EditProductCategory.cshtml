@@ -1,0 +1,31 @@
+﻿@model SonProductRegistration.Web.Models.ProductCategory
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<div id="createoredit-product-category-component" class="width-440px">
+    @using (Html.BeginForm("editproductcategory", "admin", FormMethod.Post, new { id = "createoredit-product-category-form" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.ProductCategoryID)
+
+    <div class="form-horizontal pt-3">
+        <div mat-input-field class="mat-input-field form-group">
+            <div class="label margin-bottom-5px font-weight-bold">Title:</div>
+            <div>
+                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div mat-select-menu class="mat-select-menu form-group">
+            <div class="label margin-bottom-5px font-weight-bold">Choose a Sector:</div>
+            <div class="w-100">
+                @Html.DropDownList("SectorID", ViewBag.ProductCategorySectorID as SelectList, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.SectorID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    }
+</div>

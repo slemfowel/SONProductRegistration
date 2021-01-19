@@ -1,0 +1,22 @@
+{
+  "name": "helloworld",
+  "version": "1.0.0",
+  "description": ".",
+  "main": "index.js",
+  "author": "Apache Cordova Team",
+  "dependencies": {
+    "@types/md5": "^2.1.33",
+    "bootstrap": "^4.3.1",
+    "browser-sync": "^2.26.5",
+    "crypto": "^1.0.1",
+    "gulp": "^4.0.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-csso": "^3.0.1",
+    "gulp-minify": "^3.1.0",
+    "gulp-rev": "^9.0.0",
+    "gulp-typescript": "^5.0.1",
+    "gulp-uglify": "^3.0.2",
+    "jquery": "^3.4.0",
+    "typescript": "^3.4.5"
+  }
+}

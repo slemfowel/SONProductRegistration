@@ -1,0 +1,202 @@
+﻿@using System
+@using System.Globalization
+@using System.Text;
+
+@model SonProductRegistration.Web.ViewModels.CompanyProductViewModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_secureAdmin.cshtml";
+
+    var action = ViewData["Action"] as string;
+    var controller = ViewData["Controller"] as string;
+    var id = ViewData["Id"];
+    var baseUrl = ViewBag.BaseUrl as string;
+
+    var ISCREATEPRODUCTBRAND = (null != Session["ISCREATEPRODUCTBRAND"]) ? (bool)Session["ISCREATEPRODUCTBRAND"] : false;
+}
+
+@Html.HiddenFor(model => model.CompanyProductID)
+<div id="admin-product-details-component" class="company-product-details-component vatebra-manage-component">
+    <div class="d-flex product-details-section mb-3 p-3 height-75px bg-primary text-white">
+        <div class="mb-2 w-50">
+            <span class="font-weight-normal text-white">Product Name:</span>
+            <h6 class="text-white font-weight-bold text-16px text-uppercase">@Model.ProductName</h6>
+        </div>
+        <div class="mb-2 w-50">
+            <span class="font-weight-normal text-white">Product Category:</span>
+            <h6 class="text-white font-weight-bold text-16px text-uppercase">@Model.ProductCategoryDescription</h6>
+        </div>
+        <div class="mb-2 w-50">
+            <span class="font-weight-normal text-white">Product Type:</span>
+            <h6 class="text-white font-weight-bold text-16px text-uppercase">@Model.ProductTypeDescription</h6>
+        </div>
+        <div class="mb-2 w-50">
+            <span class="font-weight-normal text-white">Service Charge:</span>
+            <h6 class="text-white font-weight-bold text-16px text-uppercase">@Html.Raw("NGN " + String.Format("{0:N2}", @Model.ServiceCharge))</h6>
+        </div>
+
+        <div class="text-white nav-back-button-container">
+            <a href="~/admin/pendingproducts" class="nav-back-button">
+                <i class="text-white fa fa-arrow-left"></i>
+            </a>
+        </div>
+    </div>
+
+    <div class="product-details-brand-listing-section p-0 bg-white">
+        <div>
+            <div id="product-brand-description-titlebar" class="d-flex pt-3 pl-3 pr-3 pb-3">
+                <div class="w-50"><h5 class="m-0">@Model.ProductName Brands (@Model.CompanyProductBrands.Count)</h5></div>
+            </div>
+            <div id="product-brand-searchbar" class="product-brand-search-section bg-light d-flex">
+                <div class="width-30px position-relative ml-2">
+                    <div class="width-13px height-20px m-auto position-absolute fixed-top fixed-left fixed-bottom fixed-right"><i class="fa fa-search"></i></div>
+                </div>
+                <div class="w-100"><input type="text" class="form-control border-0 bg-transparent pl-1" placeholder="Search..." /></div>
+                <div class="width-50px position-relative mr-0 cursor-pointer">
+                    <div class="width-13px height-20px m-auto position-absolute fixed-top fixed-left fixed-bottom fixed-right"><i class="fa fa-arrow-right"></i></div>
+                </div>
+            </div>
+            <div id="product-brand-list-group" class="product-brand-list-group-section list-group list-group-flush">
+                @if (Model.CompanyProductBrands.Count > 0)
+                {
+                    var counter = 0;
+                    foreach (var companyProductBrand in Model.CompanyProductBrands)
+                    {
+                        var active = (counter <= 0) ? "active" : "";
+                        <a data-product-brand-module="pendingdetails" data-product-brand-id="@companyProductBrand.CompanyProductBrandID" list-group-item class="list-group-item list-group-item-action flex-column cursor-pointer align-items-start shadow @active">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h6 class="font-weight-bold mb-1">@companyProductBrand.BrandName</h6>
+                            </div>
+                            <div class="max-height-60px overflow-hidden">
+                                <p class="mb-1">@companyProductBrand.ProductDescription</p>
+                            </div>
+                            @*<div class="footer mt-3">
+                                    <div class="float-left mr-2">
+                                        <i class="fa fa-edit"></i>
+                                        <span>Edit</span>
+                                    </div>
+                                    <div class="float-left">
+                                        <i class="fa fa-trash"></i>
+                                        <span>Delete</span>
+                                    </div>
+                                </div>*@
+                        </a>
+                        counter += 1;
+                    }
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="product-brand-details-section">
+
+        <div id="product-brand-details-stackable-view-section" class="product-brand-details-stackable-view-section">
+            <div class="stackable-view-panel-container">
+                <div id="preview-brand-product-details" class="stackable-view-panel active">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<!-- create or edit product disapproval modal -->
+<div class="modal fade" id="createoredit-product-disapproval-modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">New Product Brand</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body pt-0">
+                <div id="createoredit-product-disapproval-modal-view" class="createoredit-product-disapproval-modal-view pl-3 pt-0 pr-3 pb-3">
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" id="save-product-disapproval-details-button" data-return-url="@baseUrl/admin/pendingproducts" data-product-id="@Model.CompanyProductID" class="btn btn-primary">Continue</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- create or edit product approval modal -->
+<div class="modal fade" id="createoredit-product-approval-modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">New Product Brand</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body pt-0">
+                <div id="createoredit-product-approval-modal-view" class="createoredit-product-approval-modal-view pl-3 pt-0 pr-3 pb-3">
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" id="save-product-approval-details-button" data-return-url="@baseUrl/admin/pendingproducts" data-product-id="@Model.CompanyProductID" class="btn btn-primary">Continue</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- create or edit product brand modal -->
+<div class="modal fade" id="createoredit-product-brand-modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">New Product Brand</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="createoredit-product-brand-modal-view" class="createoredit-product-brand-modal-view pl-3 pt-0 pr-3 pb-3">
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" id="save-product-registration-button" class="btn btn-primary">Create</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- product document preview modal -->
+<div class="modal fade" id="product-document-preview-modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered vatebra-document-preview" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">New Product Registration</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="product-document-preview-modal-view" class="product-document-preview-modal-view pl-3 pt-0 pr-3 pb-3">
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" id="save-product-registration-button" class="btn btn-primary">Create</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@{
+    //Session.Remove("ISCREATEPRODUCTBRAND");
+}

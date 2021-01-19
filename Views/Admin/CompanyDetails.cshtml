@@ -1,0 +1,173 @@
+﻿@model SonProductRegistration.Web.ViewModels.CompanyViewModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_secureAdmin.cshtml";
+
+    var action = ViewData["Action"] as string;
+    var controller = ViewData["Controller"] as string;
+    var id = ViewData["Id"];
+
+    var ISCREATEPRODUCTBRAND = (null != Session["ISCREATEPRODUCTBRAND"]) ? (bool)Session["ISCREATEPRODUCTBRAND"] : false;
+}
+
+@Html.HiddenFor(model => model.CompanyID)
+<div id="company-details-component" class="company-details-component vatebra-manage-component">
+    <div class="d-flex company-details-section mb-3 p-3 height-130px bg-primary text-white">
+        <div class="mb-2 w-50">
+            <span class="font-weight-normal text-white">Company Name:</span>
+            <h6 class="text-white font-weight-bold text-16px text-uppercase">@Model.CompanyName</h6>
+        </div>
+        <div class="mb-2 width-130px">
+            <span class="font-weight-normal text-white">CAC Number:</span>
+            <h6 class="text-white font-weight-bold text-16px text-uppercase">@Model.CACNumber</h6>
+        </div>
+        <div class="mb-2 width-130px">
+            <span class="font-weight-normal text-white">TIN:</span>
+            <h6 class="text-white font-weight-bold text-16px text-uppercase">@Model.Tin</h6>
+        </div>
+        <div class="mb-2 w-50">
+            <span class="font-weight-normal text-white">Business Address:</span>
+            <h6 class="text-white font-weight-bold text-16px text-uppercase">@Model.BusinessAddress</h6>
+        </div>
+
+        <div class="text-white nav-back-button-container">
+            <a href="~/admin/companies" class="nav-back-button">
+                <i class="text-white fa fa-arrow-left"></i>
+            </a>
+        </div>
+    </div>
+
+    <div class="company-details-product-listing-section p-0 bg-white">
+        <div>
+            <div id="product-listing-titlebar" class="d-flex pt-3 pl-3 pr-3 pb-3">
+                <div class="w-50"><h5 class="m-0">Registered Products (@Model.CompanyProducts.Count)</h5></div>
+                <div class="w-50">
+                    <div class="float-right">
+                        <button id="add-product-brand-button" class="btn btn-primary btn-sm" data-product-id="@id">
+                            <i class="fa fa-plus"></i>
+                            <span>Restriction</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div id="company-product-searchbar" class="company-product-search-section bg-light d-flex">
+                <div class="width-30px position-relative ml-2">
+                    <div class="width-13px height-20px m-auto position-absolute fixed-top fixed-left fixed-bottom fixed-right"><i class="fa fa-search"></i></div>
+                </div>
+                <div class="w-100"><input type="text" class="form-control border-0 bg-transparent pl-1" placeholder="Search..." /></div>
+                <div class="width-50px position-relative mr-0 cursor-pointer">
+                    <div class="width-13px height-20px m-auto position-absolute fixed-top fixed-left fixed-bottom fixed-right"><i class="fa fa-arrow-right"></i></div>
+                </div>
+            </div>
+            <div id="company-product-list-group" class="company-product-list-group-section list-group list-group-flush">
+                @if (Model.CompanyProducts.Count > 0)
+                {
+                    var counter = 0;
+                    var rowNumber = 1;
+                    foreach (var companyProduct in Model.CompanyProducts)
+                    {
+                        var active = (counter <= 0) ? "active" : "";
+                        <a data-product-id="@companyProduct.CompanyProductID" list-group-item class="d-flex list-group-item list-group-item-action cursor-pointer align-items-start shadow @active">
+                            <div class="min-width-20px mr-2">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h6 class="font-weight-bold mb-1">@rowNumber.</h6>
+                                </div>
+                            </div>
+                            <div class="w-100">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h6 class="font-weight-bold mb-1">@companyProduct.ProductName</h6>
+                                </div>
+                                <div class="max-height-30px overflow-hidden">
+                                    <p class="mb-1">Ref. #: @companyProduct.ReferenceNumber</p>
+                                </div>
+                                @*<div class="footer mt-3">
+                                        <div class="float-left mr-2">
+                                            <i class="fa fa-edit"></i>
+                                            <span>Edit</span>
+                                        </div>
+                                        <div class="float-left">
+                                            <i class="fa fa-trash"></i>
+                                            <span>Delete</span>
+                                        </div>
+                                    </div>*@
+                            </div>
+                        </a>
+                        counter += 1;
+                        rowNumber += 1;
+                    }
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="product-brand-details-section">
+
+        <div id="company-product-details-stackable-view-section" class="company-product-details-stackable-view-section">
+            <div class="stackable-view-panel-container">
+
+                <!-- preview brand product details form -->
+                <div id="preview-product-details" class="stackable-view-panel active">
+
+                </div>
+
+                <!-- create or edit brand product details form -->
+                <div id="createoredit-product-details-form" class="stackable-view-panel">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- create or edit product brand modal -->
+<div class="modal fade" id="createoredit-product-brand-modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">New Product Brand</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="createoredit-product-brand-modal-view" class="createoredit-product-brand-modal-view pl-3 pt-0 pr-3 pb-3">
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" id="save-product-registration-button" class="btn btn-primary">Create</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- product document preview modal -->
+<div class="modal fade" id="product-document-preview-modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered vatebra-document-preview" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">New Product Registration</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="product-document-preview-modal-view" class="product-document-preview-modal-view pl-3 pt-0 pr-3 pb-3">
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" id="save-product-registration-button" class="btn btn-primary">Create</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@{
+    //Session.Remove("ISCREATEPRODUCTBRAND");
+}

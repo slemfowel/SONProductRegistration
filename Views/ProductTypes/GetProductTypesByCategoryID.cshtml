@@ -1,0 +1,33 @@
+﻿@model IEnumerable<SonProductRegistration.Web.Models.ProductType>
+
+<table id="product-category-type-datagridview" class="vatebra-datagridview table table-sm">
+    <thead>
+        <tr>
+            <th scope="col">Description</th>
+            <th scope="col" class="width-150px">Service Charge</th>
+            <th scope="col" class="width-50px"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int productTypeCounter = 1;
+        }
+        @foreach (var ProductType in Model)
+        {
+            <tr class="cursor-pointer" aria-datagrid-row>
+                <td>@ProductType.Description</td>
+                <td>@ProductType.ServiceCharge</td>
+                <td>
+                    <div class="custom-control custom-radio">
+                        @{
+                            var ProductTypeID = "ProductTypeID" + @ProductType.ProductTypeID;
+                        }
+                        <input name="ProductTypeID" value="@ProductType.ProductTypeID" type="radio" class="custom-control-input" id="@ProductTypeID">
+                        <label class="custom-control-label" for="@ProductTypeID"></label>
+                    </div>
+                </td>
+            </tr>
+            productTypeCounter += 1;
+        }
+    </tbody>
+</table>

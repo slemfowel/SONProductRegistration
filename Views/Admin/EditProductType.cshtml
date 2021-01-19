@@ -1,0 +1,58 @@
+﻿@model SonProductRegistration.Web.Models.ProductType
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<div id="createoredit-product-type-component" class="width-500px mt-3">
+    @using (Html.BeginForm("editproducttype", "admin", FormMethod.Post, new { id = "createoredit-product-type-form" }))
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ProductTypeID)
+
+        <div mat-select-menu class="mat-select-menu form-group">
+            <div class="label margin-bottom-5px font-weight-bold">Product Category:</div>
+            <div class="w-100">
+                @Html.DropDownList("ProductCategoryID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ProductCategoryID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div mat-input-field class="mat-input-field form-group">
+            <div class="label margin-bottom-5px font-weight-bold">Description:</div>
+            <div class="w-100">
+                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group d-flex">
+            <div mat-input-field class="mat-input-field mr-2 w-50">
+                <div class="label font-weight-bold">Interval(In Months):</div>
+                <div class="w-100">
+                    @Html.EditorFor(model => model.ExpectedRegistrationInterval, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ExpectedRegistrationInterval, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div mat-input-field class="mat-input-field ml-2 w-50">
+                <div class="label font-weight-bold">Service Charge(NGN):</div>
+                <div class="w-100">
+                    @Html.EditorFor(model => model.ServiceCharge, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ServiceCharge, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div mat-select-menu class="mat-select-menu form-group">
+            <div class="label font-weight-bold">Status:</div>
+            <div class="w-100">
+                @Html.DropDownList("Status", ViewBag.Status as SelectList, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+    }
+</div>

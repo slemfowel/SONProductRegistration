@@ -1,0 +1,242 @@
+﻿@using SonProductRegistration.Web.CustomEnum;
+
+@model SonProductRegistration.Web.Models.CompanyProductBrand
+
+@{
+    var baseUrl = ViewBag.BaseUrl as string;
+}
+<div class="createoredit-product-brand-component" id="createoredit-product-brand-component" document-owner-id="@Html.Raw(Model.CompanyProductBrandDocumentID)">
+    @using (Html.BeginForm("savechanges", "companyproductbrands", FormMethod.Post, new { id = "createoredit-product-brand-form", enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        @Html.HiddenFor(model => model.CompanyProductID)
+        @Html.HiddenFor(model => model.CompanyProductBrandID)
+        @Html.HiddenFor(model => model.CompanyProductBrandDocumentID)
+
+        <ul class="nav nav-sidebar">
+            <li class="sidebar-nav-item with-sub">
+                <a href="" class="sidebar-nav-link font-weight-bold text-20px height-53px"><i class="icon ion-ios-book-outline"></i>New Brand Details</a>
+
+                <div mat-step-progress id="create-or-edit-brand-mat-step-progress" class="mat-step-progress">
+                    <div class="mat-progress-bar mb-4">
+                        <ul id="progressbar" class="d-flex w-100">
+                            <li class="w-100 active">
+                                <i></i>
+                                <span>Brand Details</span>
+                            </li>
+                            <li class="w-100">
+                                <i></i>
+                                <span>Upload Documents</span>
+                            </li>
+                            <li class="w-100">
+                                <i></i>
+                                <span>Verify Details</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="mat-panel-view">
+                        <div class="mat-panel-container bg-white" id="brand-details-tab">
+                            <div class="mat-panel brand-details-panel p-4">
+                                <div id="brand-details-section" class="panel-section margin-auto width-450px pb-5">
+                                    <div mat-input-field class="w-100 margin-bottom-30px mat-input-field">
+                                        <div class="label w-35 mr-3 text-left font-weight-normal text-secondary margin-right-3px">What is your brand name:</div>
+                                        <div class="text-dark" mat-field-name="BrandName">
+                                            @Html.EditorFor(model => model.BrandName, new { @htmlAttributes = new { @class = "form-control w-100" } })
+                                            @Html.ValidationMessageFor(model => model.BrandName, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div mat-upload-button 
+                                         popover-title="Upload product photo" 
+                                         id="create-or-edit-brand-product-photo-uploader" 
+                                         upload-items="['Product Photo']" 
+                                         image-url="/image/productphoto/" 
+                                         class="margin-bottom-30px mat-upload-button" 
+                                         upload-url="/document/upload">
+                                        <div upload-button class="upload-button upload-item">
+                                            <input type="file" class="custom-file-input" id="ProductPhotoFile" name="@DocumentTypeEnum.ProductPhoto">
+                                            <div class="label">
+                                                <div>Drag & Drop to Upload Product Photo</div>
+                                                <div>(300KB Max, JPG or PDF)</div>
+                                                <div class="mt-2 mb-2">- Or -</div>
+                                                <button class="mt-0 btn">Select from your computer</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div mat-editable-field class="w-100 margin-bottom-30px mat-editable-field">
+                                        <div class="label w-35 mr-3 text-left font-weight-normal text-secondary margin-right-3px">Product Full Description:</div>
+                                        <div class="text-dark">
+                                            <div contenteditable class="form-control w-100" mat-field-name="ProductDescription">@Model.ProductDescription</div>
+                                            @Html.ValidationMessageFor(model => model.ProductDescription, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div mat-editable-field class="w-100 margin-bottom-30px mat-editable-field">
+                                        <div class="label w-35 mr-3 text-left font-weight-normal text-secondary margin-right-3px">Major Product Components</div>
+                                        <div class="text-dark">
+                                            <div contenteditable class="form-control w-100" mat-field-name="ProductComponent">@Model.ProductComponent</div>
+                                            @Html.ValidationMessageFor(model => model.ProductComponent, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div mat-editable-field class="w-100 margin-bottom-30px mat-editable-field">
+                                        <div class="label w-35 mr-3 text-left font-weight-normal text-secondary margin-right-3px">Description of Manufacturing Process</div>
+                                        <div class="text-dark">
+                                            <div contenteditable class="form-control w-100" mat-field-name="ManufacturingProcess">@Model.ManufacturingProcess</div>
+                                            @Html.ValidationMessageFor(model => model.ManufacturingProcess, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div mat-editable-field class="w-100 margin-bottom-30px mat-editable-field">
+                                        <div class="label w-35 mr-3 text-left font-weight-normal text-secondary margin-right-3px">Warehouse/Factory Address</div>
+                                        <div class="text-dark">
+                                            <div contenteditable class="form-control w-100" mat-field-name="FactoryAddress">@Model.FactoryAddress</div>
+                                            @Html.ValidationMessageFor(model => model.FactoryAddress, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div mat-editable-field class="w-100 margin-bottom-30px mat-editable-field">
+                                        <div class="label w-35 mr-3 text-left font-weight-normal text-secondary margin-right-3px">Packaging Specifications/Sizes</div>
+                                        <div class="text-dark">
+                                            <div contenteditable class="form-control w-100" mat-field-name="PackagingSpecifications">@Model.PackagingSpecifications</div>
+                                            @Html.ValidationMessageFor(model => model.PackagingSpecifications, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div mat-select-menu class="w-100 margin-bottom-30px mat-select-menu">
+                                        <div class="label w-35 mr-3 text-left font-weight-normal text-secondary margin-right-3px">Type of Business:</div>
+                                        <div class="text-dark" mat-field-name="BusinessType">
+                                            @Html.DropDownList("BusinessType", ViewBag.BusinessType as SelectList, htmlAttributes: new { @id = "business-type-combo", @class = "form-control w-100" })
+                                            @Html.ValidationMessageFor(model => model.BusinessType, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="overflow-hidden mb-5">
+                                        <div class="float-right">
+                                            <button type="button" id="save-details-button" class="btn btn-primary">
+                                                <span>Save & Continue</span>
+                                                <i class="text-white fa fa-arrow-right"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="mat-panel brand-document-uploads-panel p-4">
+                                <div class="panel-section margin-auto width-500px">
+                                    <div mat-upload-button 
+                                         popover-title="What to upload"
+                                         id="create-or-edit-brand-product-documents-uploader"
+                                         upload-items="['Product Warranty Document',
+                                                        'Product Literature Document',
+                                                        'Standards/Specification Document',
+                                                        'Certificate of Analysis From Manufacturer Document']" 
+                                         class="margin-bottom-50px mat-upload-button" 
+                                         upload-url="/document/upload"
+                                         image-url="/image/productphoto/" >
+                                        <div upload-button class="upload-button upload-item">
+                                            <input type="file" id="ProductWarrantyFile" name="@DocumentTypeEnum.ProductWarranty">
+                                            <div class="label">
+                                                <div>Drag & Drop Files to Upload Here</div>
+                                                <div>(300KB Max, JPG or PDF)</div>
+                                                <div class="mt-2 mb-2">- Or -</div>
+                                                <button class="mt-0 btn">Select from your computer</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="overflow-hidden mb-5">
+                                        <div class="float-right">
+                                            <button type="button" id="back-to-details-button" class="btn btn-secondary">
+                                                <span>Back to Details</span>
+                                                <i class="text-white fa fa-arrow-left"></i>
+                                            </button>
+                                            <button type="button" id="save-uploads-button" class="btn btn-primary">
+                                                <span>Save & Continue</span>
+                                                <i class="text-white fa fa-arrow-right"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="mat-panel brand-details-preview-panel p-4">
+                                <div class="panel-section margin-auto width-450px">
+
+                                    <div class="mb-5 min-height-300px">
+
+                                        <div>
+                                            <div mat-label class="w-100 margin-bottom-30px mat-label" mat-field-name="BrandName">
+                                                <div class="label w-35 mr-3 text-left font-weight-normal text-secondary margin-right-3px">What is your brand name:</div>
+                                                <div text class="text-dark form-control border-0 pl-0 pr-0 pre-wrap"></div>
+                                            </div>
+
+                                            <div mat-upload-preview
+                                                 id="create-or-edit-brand-product-photo-preview"
+                                                 class="margin-bottom-30px mat-upload-preview">
+                                            </div>
+
+                                            <div mat-label class="w-100 margin-bottom-30px mat-label" mat-field-name="ProductDescription">
+                                                <div class="label w-35 mr-3 text-left font-weight-normal text-secondary margin-right-3px">Product Full Description:</div>
+                                                <div text class="text-dark form-control border-0 pl-0 pr-0 pre-wrap"></div>
+                                            </div>
+
+                                            <div mat-label class="w-100 margin-bottom-30px mat-label" mat-field-name="ProductComponent">
+                                                <div class="label w-35 mr-3 text-left font-weight-normal text-secondary margin-right-3px">Major Product Components</div>
+                                                <div text class="text-dark form-control border-0 pl-0 pr-0 pre-wrap"></div>
+                                            </div>
+
+                                            <div mat-label class="w-100 margin-bottom-30px mat-label" mat-field-name="ManufacturingProcess">
+                                                <div class="label w-35 mr-3 text-left font-weight-normal text-secondary margin-right-3px">Description of Manufacturing Process</div>
+                                                <div text class="text-dark form-control border-0 pl-0 pr-0 pre-wrap"></div>
+                                            </div>
+
+                                            <div mat-label class="w-100 margin-bottom-30px mat-label" mat-field-name="FactoryAddress">
+                                                <div class="label w-35 mr-3 text-left font-weight-normal text-secondary margin-right-3px">Warehouse/Factory Address</div>
+                                                <div text class="text-dark form-control border-0 pl-0 pr-0 pre-wrap"></div>
+                                            </div>
+
+                                            <div mat-label class="w-100 margin-bottom-30px mat-label" mat-field-name="PackagingSpecifications">
+                                                <div class="label w-35 mr-3 text-left font-weight-normal text-secondary margin-right-3px">Packaging Specifications/Sizes</div>
+                                                <div text class="text-dark form-control border-0 pl-0 pr-0 pre-wrap"></div>
+                                            </div>
+
+                                            <div mat-label class="w-100 margin-bottom-30px mat-label" mat-field-name="BusinessType">
+                                                <div class="label w-35 mr-3 text-left font-weight-normal text-secondary margin-right-3px">Type of Business:</div>
+                                                <div text class="text-dark form-control border-0 pl-0 pr-0 pre-wrap"></div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="overflow-hidden mb-5">
+                                        <div class="float-right">
+                                            <button type="button" id="back-to-uploads-button" class="btn btn-secondary">
+                                                <span>Back to Details</span>
+                                                <i class="text-white fa fa-arrow-left"></i>
+                                            </button>
+                                            <button type="submit" id="save-brand-button" class="btn btn-primary">
+                                                <span>Save & Continue</span>
+                                                <i class="text-white fa fa-arrow-right"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </li>
+        </ul>
+    }
+</div>

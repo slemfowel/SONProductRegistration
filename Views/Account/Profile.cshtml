@@ -1,0 +1,145 @@
+﻿@model SonProductRegistration.Web.Models.Company
+
+@{
+    ViewBag.Title = "Profile";
+    Layout = "~/Views/Shared/_secure.cshtml";
+}
+
+<!-- <h2>Hello, @Model.ContactPersonName</h2> -->
+<div class="vatebra-pageheader">
+    <ol class="breadcrumb vatebra-breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Home</a></li>
+        <li class="breadcrumb-item"><a href="#">Profile</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Profile Page</li>
+    </ol>
+    <h6 class="vatebra-pagetitle">My Profile</h6>
+</div>
+<div class="row row-sm">
+    <div class="col-lg-8">
+        <div class="card card-profile">
+            <div class="card-body">
+                <div class="media">
+                    <img src="" alt="">
+                    <div class="media-body">
+                        <h3 class="card-profile-name"> @Html.DisplayFor(model => model.CompanyName)</h3>
+                        <p class="card-profile-position"> @Html.DisplayNameFor(model => model.CompanyName)</p>
+
+                        <br />
+                        <p class="mg-b-0">
+                        <p class="card-profile-position tx-primary">@Html.DisplayNameFor(model => model.BusinessAddress)</p>
+                        @Html.DisplayFor(model => model.BusinessAddress)
+
+                        </p>
+                    </div><!-- media-body -->
+                </div><!-- media -->
+            </div><!-- card-body -->
+            <div class="card-footer">
+
+                <div>
+                    <a href="">@Html.DisplayNameFor(model => model.BusinessPhoneNumber)</a>
+                    <a href="">@Html.DisplayFor(model => model.BusinessPhoneNumber)</a>
+                    <a href="">@Html.DisplayNameFor(model => model.DateOfIncorporation)</a>
+                    <a href="">@Html.DisplayFor(model => model.DateOfIncorporation)</a>
+                </div>
+            </div><!-- card-footer -->
+        </div><!-- card -->
+
+        <div class="card card-experience mg-t-20">
+            <div class="card-body">
+                <div class="vatebra-card-title">Ware House Address </div>
+                <div class="media">
+                    <div class="experience-logo">
+                        <i class="icon ion-briefcase"></i>
+                    </div><!-- experience-logo -->
+                    <div class="media-body">
+                        <h6 class="position-name"> @Html.DisplayNameFor(model => model.WareHouseAddress)</h6>
+                        <p class="position-company"> @Html.DisplayFor(model => model.WareHouseAddress) </p>
+
+                    </div><!-- media-body -->
+                </div><!-- media -->
+            </div><!-- card-body -->
+            <div class="card-footer">
+                <a href=""> @Html.DisplayNameFor(model => model.LGA.LGAName) :: <span>  @Html.DisplayFor(model => model.LGA.LGAName)</span> <i class="fa fa-angle-down"></i></a>
+                <a href=""> @Html.DisplayNameFor(model => model.DateCreated) ::   @Html.DisplayFor(model => model.DateCreated)</a>
+            </div><!-- card-footer -->
+        </div><!-- card -->
+        <div class="card card-experience mg-t-20">
+            <div class="card-body">
+                <div class="vatebra-card-title">Business Address Location</div>
+                <div class="media">
+                    <div class="experience-logo">
+                        <i class="icon ion-home"></i>
+                    </div><!-- experience-logo -->
+                    <div class="media-body">
+                        <h6 class="position-name">   @Html.DisplayNameFor(model => model.BusinessAddressLocationCode)</h6>
+                        <p class="position-company">@Html.DisplayFor(model => model.BusinessAddressLocationCode)</p>
+
+                    </div><!-- media-body -->
+                </div><!-- media -->
+            </div><!-- card-body -->
+            <div class="card-footer">
+                <a href=""> @Html.DisplayNameFor(model => model.State.StateName) :: <span class="d-none d-sm-inline"> @Html.DisplayFor(model => model.State.StateName)</span> </a>
+                <a href=""> @Html.DisplayNameFor(model => model.DateLastModified) ::  @Html.DisplayFor(model => model.DateLastModified) </a>
+            </div><!-- card-footer -->
+        </div><!-- card -->
+    </div>
+    <div class="col-lg-4 mg-t-20 mg-lg-t-0">
+        <div class="card card-connection">
+            <div class="row row-xs">
+                <div class="col-6 tx-primary"><h3>@Html.DisplayNameFor(model => model.Tin)</h3> </div>
+                <div class="col-6"> @Html.DisplayFor(model => model.Tin)</div>
+            </div><!-- row -->
+            <hr>
+            <div class="row row-xs">
+                <div class="col-6 tx-primary"><h3>@Html.DisplayNameFor(model => model.CACNumber)</h3>  </div>
+                <div class="col-6">
+
+                    @Html.DisplayFor(model => model.CACNumber)
+                </div>
+            </div><!-- row -->
+            <hr>
+            <div class="row row-xs">
+                <div class="col-6 tx-primary"><h3> @Html.DisplayNameFor(model => model.Status)</h3>  </div>
+                <div class="col-6">
+
+                    @Html.DisplayFor(model => model.Status)
+                </div>
+            </div><!-- row -->
+
+
+        </div><!-- card -->
+        <div class="card-footer">
+            <a href="">   @Html.DisplayNameFor(model => model.CertificateOfIncorporationId) :: <span class="d-none d-sm-inline"> @Html.DisplayFor(model => model.CertificateOfIncorporationId)</span> </a>
+
+        </div>
+    </div>
+    
+</div>
+        <div>
+           
+            <dl class="dl-horizontal">
+
+          
+
+
+                <dt>
+                 
+                </dt>
+
+                <dd>
+                    
+                </dd>
+
+                <dt>
+                  
+                </dt>
+
+                <dd>
+                    
+                </dd>
+
+           
+
+            </dl>
+        </div>
+

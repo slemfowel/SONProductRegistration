@@ -1,0 +1,129 @@
+﻿@model SonProductRegistration.Web.Models.Company
+
+@{
+    ViewBag.Title = "Create";
+}
+
+
+<div id="createoredit-user-component" class="width-500px mt-4">
+    @using (Html.BeginForm("create", "companies", FormMethod.Post, new { id = "createoredit-company-form", enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div mat-input-field class="mat-input-field form-group">
+            <div class="label margin-bottom-5px font-weight-bold">Company Name:</div>
+            <div class="w-100">
+                @Html.EditorFor(model => model.CompanyName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CompanyName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div mat-input-field class="mat-input-field form-group">
+            <div class="label margin-bottom-5px font-weight-bold">Business Address:</div>
+            <div class="w-100">
+                @Html.EditorFor(model => model.BusinessAddress, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.BusinessAddress, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div mat-input-field class="mat-input-field form-group">
+            <div class="label margin-bottom-5px font-weight-bold">WareHouse Address:</div>
+            <div class="w-100">
+                @Html.EditorFor(model => model.WareHouseAddress, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.WareHouseAddress, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div mat-input-field class="mat-input-field form-group">
+            <div class="label margin-bottom-5px font-weight-bold">Business Phone Number:</div>
+            <div class="w-100">
+                @Html.EditorFor(model => model.BusinessPhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.BusinessPhoneNumber, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="d-flex">
+            <div mat-select-menu class="mat-select-menu form-group mr-2 w-50">
+                <div class="label margin-bottom-5px font-weight-bold">State:</div>
+                <div class="w-100">
+                    @Html.DropDownList("StateID", ViewBag.StateId as SelectList, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.StateID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div mat-select-menu class="mat-select-menu form-group ml-2 w-50">
+                <div class="label margin-bottom-5px font-weight-bold">LGA:</div>
+                <div class="w-100">
+                    @Html.DropDownList("LGAID", ViewBag.LGAId as SelectList, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.LGAID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex">
+            <div mat-input-field class="mat-input-field form-group mr-2 w-50">
+                <div class="label margin-bottom-5px font-weight-bold">Tin:</div>
+                <div class="w-100">
+                    @Html.EditorFor(model => model.Tin, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Tin, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div mat-input-field class="mat-input-field form-group ml-2 w-50">
+                <div class="label margin-bottom-5px font-weight-bold">CAC Number:</div>
+                <div class="w-100">
+                    @Html.EditorFor(model => model.CACNumber, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CACNumber, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div mat-date-picker class="mat-date-picker form-group">
+            <div class="label margin-bottom-5px font-weight-bold">Date of Incorporation:</div>
+            <div class="w-100">
+                @*@Html.EditorFor(model => model.DateOfIncorporation, new { htmlAttributes = new { @class = "form-control" } })*@
+                <input name="DateOfIncorporation" value="@Model.DateOfIncorporation" type="text" class="form-control" id="date-of-incorporation-date-picker" placeholder="">
+                @Html.ValidationMessageFor(model => model.DateOfIncorporation, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div mat-upload-button class="mb-3 mat-upload-button" upload-url="/document/upload">
+            <input type="file" class="custom-file-input" id="CertificateOfIncorporationId" name="CertificateOfIncorporationId">
+            <div class="label">
+                <div>Drag & Drop to Upload Product Photo</div>
+                <div>(300KB Max, JPG or PDF)</div>
+                <div class="mt-2 mb-2">- Or -</div>
+                <button class="mt-0 btn">Select from your computer</button>
+            </div>
+        </div>
+
+
+        <div class="dropdown-divider mb-3"></div>
+        <h5 class="mb-4">Contact Person</h5>
+        <div mat-input-field class="mat-input-field form-group">
+            <div class="label margin-bottom-5px font-weight-bold">Name:</div>
+            <div class="w-100">
+                @Html.EditorFor(model => model.ContactPersonName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ContactPersonName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div mat-input-field class="mat-input-field form-group">
+            <div class="label margin-bottom-5px font-weight-bold">Email:</div>
+            <div class="w-100">
+                @Html.EditorFor(model => model.ContactPersonEmail, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ContactPersonEmail, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div mat-input-field class="mat-input-field form-group">
+            <div class="label margin-bottom-5px font-weight-bold">Phone Number:</div>
+            <div class="w-100">
+                @Html.EditorFor(model => model.ContactPersonPhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ContactPersonPhoneNumber, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    }
+</div>

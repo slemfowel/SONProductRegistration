@@ -1,0 +1,136 @@
+﻿@model IEnumerable<SonProductRegistration.Web.Models.Company>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.UserId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CompanyName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ContactPersonName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ContactPersonPhoneNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ContactPersonEmail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BusinessPhoneNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BusinessAddress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateOfIncorporation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tin)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CACNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WareHouseAddress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BusinessAddressLocationCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CertificateOfIncorporationId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateCreated)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateLastModified)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LGA.LGAName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.State.StateName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CompanyName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ContactPersonName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ContactPersonPhoneNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ContactPersonEmail)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BusinessPhoneNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BusinessAddress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateOfIncorporation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tin)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CACNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WareHouseAddress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BusinessAddressLocationCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CertificateOfIncorporationId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateCreated)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateLastModified)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LGA.LGAName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.State.StateName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

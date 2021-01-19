@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="11112cc375c24b8c9011885a930eb4c2" Name="Diagram1">
+        <EntityTypeShape EntityType="SON_ProductRegModel.AdminUser" Width="1.5" PointX="9.75" PointY="7.5" />
+        <EntityTypeShape EntityType="SON_ProductRegModel.AspNetRole" Width="1.5" PointX="5.75" PointY="0.75" />
+        <EntityTypeShape EntityType="SON_ProductRegModel.AspNetUserClaim" Width="1.5" PointX="5" PointY="8.5" />
+        <EntityTypeShape EntityType="SON_ProductRegModel.AspNetUserLogin" Width="1.5" PointX="5" PointY="3.25" />
+        <EntityTypeShape EntityType="SON_ProductRegModel.AspNetUserRole" Width="1.5" PointX="8" PointY="4.5" />
+        <EntityTypeShape EntityType="SON_ProductRegModel.AspNetUser" Width="1.5" PointX="2.75" PointY="3.625" />
+        <EntityTypeShape EntityType="SON_ProductRegModel.AuditEvent" Width="1.5" PointX="10.75" PointY="1.5" />
+        <EntityTypeShape EntityType="SON_ProductRegModel.AuditTable" Width="1.5" PointX="0.75" PointY="11.5" />
+        <EntityTypeShape EntityType="SON_ProductRegModel.Company" Width="1.5" PointX="5.25" PointY="12.125" />
+        <EntityTypeShape EntityType="SON_ProductRegModel.CompanyProduct" Width="1.5" PointX="7.5" PointY="18" />
+        <EntityTypeShape EntityType="SON_ProductRegModel.CompanyProductApprovalRequest" Width="1.5" PointX="10.75" PointY="11.5" />
+        <EntityTypeShape EntityType="SON_ProductRegModel.CompanyProductBrand" Width="1.5" PointX="11.75" PointY="5.5" />
+        <EntityTypeShape EntityType="SON_ProductRegModel.CompanyProductDemandNote" Width="1.5" PointX="7.75" PointY="1.5" />
+        <EntityTypeShape EntityType="SON_ProductRegModel.CompanyProductEReceipt" Width="1.5" PointX="12.75" PointY="1.5" />
+        <EntityTypeShape EntityType="SON_ProductRegModel.CompanyProductInspection" Width="1.5" PointX="12.75" PointY="10.5" />
+        <EntityTypeShape EntityType="SON_ProductRegModel.CompanyTemp" Width="1.5" PointX="8.25" PointY="12.5" />
+        <EntityTypeShape EntityType="SON_ProductRegModel.Document" Width="1.5" PointX="13.75" PointY="4.5" />
+        <EntityTypeShape EntityType="SON_ProductRegModel.EmailTemplate" Width="1.5" PointX="12.75" PointY="14.5" />
+        <EntityTypeShape EntityType="SON_ProductRegModel.LGA" Width="1.5" PointX="3" PointY="19.375" />
+        <EntityTypeShape EntityType="SON_ProductRegModel.ProductCategory" Width="1.5" PointX="7.75" PointY="7.5" />
+        <EntityTypeShape EntityType="SON_ProductRegModel.ProductCategorySector" Width="1.5" PointX="14.75" PointY="1.5" />
+        <EntityTypeShape EntityType="SON_ProductRegModel.ProductType" Width="1.5" PointX="14.75" PointY="8.5" />
+        <EntityTypeShape EntityType="SON_ProductRegModel.Reason" Width="1.5" PointX="0.75" PointY="15.5" />
+        <EntityTypeShape EntityType="SON_ProductRegModel.State" Width="1.5" PointX="0.75" PointY="8" />
+        <EntityTypeShape EntityType="SON_ProductRegModel.WarehouseInspectionChecklist" Width="1.5" PointX="14.75" PointY="14.5" />
+        <EntityTypeShape EntityType="SON_ProductRegModel.AdminUserView" Width="1.5" PointX="16.75" PointY="1.5" />
+        <EntityTypeShape EntityType="SON_ProductRegModel.CompanyProductApprovalRequestView" Width="1.5" PointX="16.75" PointY="6.5" />
+        <EntityTypeShape EntityType="SON_ProductRegModel.CompanyProductBrandView" Width="1.5" PointX="10.75" PointY="17.5" />
+        <EntityTypeShape EntityType="SON_ProductRegModel.CompanyProductDemandNoteView" Width="1.5" PointX="16.75" PointY="13.5" />
+        <EntityTypeShape EntityType="SON_ProductRegModel.CompanyProductEReceiptView" Width="1.5" PointX="12.75" PointY="17.5" />
+        <EntityTypeShape EntityType="SON_ProductRegModel.CompanyProductInspectionView" Width="1.5" PointX="18.75" PointY="1.5" />
+        <EntityTypeShape EntityType="SON_ProductRegModel.CompanyProductView" Width="1.5" PointX="18.75" PointY="8.5" />
+        <EntityTypeShape EntityType="SON_ProductRegModel.CompanyView" Width="1.5" PointX="18.75" PointY="16.5" />
+        <EntityTypeShape EntityType="SON_ProductRegModel.ProductCategoryView" Width="1.5" PointX="14.75" PointY="20.5" />
+        <AssociationConnector Association="SON_ProductRegModel.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" />
+        <AssociationConnector Association="SON_ProductRegModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="SON_ProductRegModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="SON_ProductRegModel.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="SON_ProductRegModel.FK_CompanyProduct_Company" />
+        <AssociationConnector Association="SON_ProductRegModel.FK_CompanyRegistration_LGA" />
+        <AssociationConnector Association="SON_ProductRegModel.FK_CompanyRegistration_States" />
+        <AssociationConnector Association="SON_ProductRegModel.FK_CompanyTemp_LGA" />
+        <AssociationConnector Association="SON_ProductRegModel.FK_CompanyTemp_State" />
+        <AssociationConnector Association="SON_ProductRegModel.FK_LGA_States" />
+        <AssociationConnector Association="SON_ProductRegModel.FK_ProductCategory_ProductCategory" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

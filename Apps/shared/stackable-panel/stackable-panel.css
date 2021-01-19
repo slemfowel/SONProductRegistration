@@ -1,0 +1,32 @@
+.stackable-panel {
+    outline: none;
+    position: relative;
+}
+
+.stackable-panel .panel {
+    outline: none;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 0;
+    visibility: hidden;
+    opacity: 0;
+    -webkit-transition: visibility .3s linear, opacity .3s linear;
+    -moz-transition: visibility .3s linear, opacity .3s linear;
+    -ms-transition: visibility .3s linear, opacity .3s linear;
+    transition: visibility .3s linear, opacity .3s linear;
+}
+
+.stackable-panel .panel[selected] {
+    outline: none;
+    position: relative;
+    top: unset;
+    left: unset;
+    height: unset;
+    visibility: visible;
+    opacity: 1;
+    -webkit-transition: visibility .3s linear, opacity .3s linear;
+    -moz-transition: visibility .3s linear, opacity .3s linear;
+    -ms-transition: visibility .3s linear, opacity .3s linear;
+    transition: visibility .3s linear, opacity .3s linear;
+}

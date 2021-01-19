@@ -1,0 +1,77 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+  //  Layout = "~/Views/Shared/_secure.cshtml";
+
+}
+<link href="~/Content/DataTables/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/DataTables/css/dataTables.jqueryui.css" rel="stylesheet" />
+
+<div id="user-management-component">
+    <h2>Page</h2>
+    <table class="table table-hover table-bordered table-condensed" id="UsersWithRoles">
+        <thead>
+            <tr>
+                <th><b>UserID</b></th>
+                <th><b>Action</b></th>
+                <th><b>Controler</b></th>
+                <th><b>DatePerformed</b></th>
+                <th><b>EventChange</b></th>
+            </tr>
+        </thead>
+    </table>
+
+
+</div>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
+<script src="~/Scripts/DataTables/dataTables.bootstrap.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $("#UsersWithRoles").DataTable({
+            "ajax": {
+                "url": "http://localhost/SonProductRegistration.Web/Audit/viewlist",
+                "type": "POST",
+                "datatype": "json"
+            },
+
+            "columns": [
+                {
+                    "data": "UserID", "name": "UserID",
+                },
+                {
+                    "data": "Action", "name": "Action"
+                },
+                { "data": "Controler", "name": "Controler" },
+                { "data": "DatePerformed", "name": "DatePerformed" },
+                {
+                    "data": "EventChange", "name": "EventChange"
+                },
+            ],
+
+            "serverSide": "true",
+            "order": [0, "asc"],
+            "processing": "true",
+            "language": {
+                "processing": "processing... please wait"
+            },
+
+            "fnDrawCallback": function (oSettings) {
+                var updateRowButtons = document.querySelectorAll("button[data-value=\"update-user-row\"]");
+                Array.prototype.forEach.call(updateRowButtons, function (button) {
+                    button.addEventListener("click", function () {
+                        //alert("Username is " + this.getAttribute("data-username-value"));
+                        // createUserRowModal('slem');
+                        createUserRowModal(this.getAttribute("data-username-value"));
+                    });
+                });
+
+            }
+
+        });
+    });
+
+</script>
+
+

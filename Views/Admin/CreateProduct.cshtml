@@ -1,0 +1,78 @@
+﻿@model SonProductRegistration.Web.Models.CompanyProduct
+
+@{
+    ViewBag.Title = "Create";
+    //Layout = "~/Views/Shared/_secure.cshtml";
+}
+
+<div id="createoredit-product-component" class="width-440px">
+
+    @using (Html.BeginForm("createproduct", "my", FormMethod.Post, new { id = "createoredit-product-registration-form" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group margin-bottom-20px">
+                <div class="margin-bottom-5px font-weight-bold">Name of Product:</div>
+                <div>
+                    @Html.EditorFor(model => model.ProductName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ProductName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group margin-bottom-20px">
+                <div class="margin-bottom-5px font-weight-bold">Product Category:</div>
+                <div>
+                    @if(null != ViewBag.ProductCategoryID) {
+                        @Html.DropDownList("ProductCategoryID", null, htmlAttributes: new { @id = "Product-category-combo", @class = "form-control" })
+                    } else {
+                        @Html.DropDownListFor(m => m.ProductCategoryID, Enumerable.Empty<SelectListItem>(), htmlAttributes: new { @id = "Product-category-combo", @disabled = "disabled", @class = "form-control" })
+                    }
+                </div>
+            </div>
+
+            <div class="margin-bottom-20px">
+                <div class="text-left margin-bottom-5px font-weight-bold">Choose a Product Type/Service Charge:</div>
+                <div id="product-type-grid-container">
+                    <table id="product-category-type-datagridview" class="vatebra-datagridview table table-sm">
+                        <thead>
+                            <tr>
+                                <th scope="col">Description</th>
+                                <th scope="col" class="width-150px">Service Charge</th>
+                                <th scope="col" class="width-50px"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                int productTypeCounter = 1;
+                            }
+                            @if(null != ViewBag.ProductTypes) {
+                                foreach (var ProductType in ViewBag.ProductTypes)
+                                {
+                                    <tr class="cursor-pointer" aria-datagrid-row>
+                                        <td>@ProductType.Description</td>
+                                        <td>@ProductType.ServiceCharge</td>
+                                        <td>
+                                            <div class="custom-control custom-checkbox">
+                                                @{ 
+                                                    var ProductTypeID = "ProductTypeID" + @ProductType.ProductTypeID;
+                                                }
+                                                <input name="ProductTypeID" value="@ProductType.ProductTypeID" type="checkbox" class="custom-control-input" id="@ProductTypeID">
+                                                <label class="custom-control-label" for="@ProductTypeID"></label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    productTypeCounter += 1;
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    }
+
+</div>

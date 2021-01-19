@@ -1,0 +1,78 @@
+﻿@using SonProductRegistration.Web.Models
+@model LoginViewModel
+@{
+    ViewBag.Title = "Account Login";
+    
+    Layout = "~/Views/Shared/_auth.cshtml";
+}
+
+<div class="d-md-flex flex-row-reverse">
+    <!-- signin-right -->
+    <div class="signin-left all-wrapper with-pattern">
+        <div class="signin-box">
+            <h2 class="vatebra-logo" style="color:#ffffff !important">SON Product Registration</h2>
+
+            <p style="color:#ffffff !important">We are excited to launch our new SON Product Registration. After being featured in too many magazines to mention and having created an online stir, we know that ThemePixels is going to be big. We also hope to win Startup Fictional Business of the Year this year.</p>
+
+            <p style="color:#ffffff !important">Browse our site and see for yourself why you need SON Product Registration.</p>
+
+            <p style="color:#ffffff !important"><a href="" class="btn btn-outline-secondary pd-x-25" style="color:#ffffff !important">Learn More</a></p>
+
+            <p class="tx-12" style="color:#ffffff !important">&copy; Copyright 2019. All Rights Reserved.</p>
+        </div>
+    </div>
+
+    <div class="signin-right animated fadeInDown">
+
+        <div class="signin-box">
+              <div class="logo text-center">
+                                <a href="#">
+                                    <img src="../VatebraAssets/images/sonproduct.png">
+                                    
+                                </a>
+                            </div>
+            
+            <h3 class="signin-title-secondary text-center">Admin Sign In.</h3>
+            <section id="loginForm">
+                @using (Html.BeginForm("login", "admin", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+
+
+                        @Html.TextBoxFor(m => m.Email, new { placeholder = "Email", @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+
+                    </div>
+                    <div class="form-group">
+
+
+                        @Html.PasswordFor(m => m.Password, new { placeholder = "Password", @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <div class="checkbox">
+                                @Html.CheckBoxFor(m => m.RememberMe)
+                                @Html.LabelFor(m => m.RememberMe)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Log in" class="btn btn-success btn-block btn-signin" />
+                    </div>
+                    <p>
+                        @Html.ActionLink("Forgot your password?", "ForgotPassword")
+                    </p>
+                }
+            </section>
+
+
+
+        </div>
+
+    </div>
+</div>

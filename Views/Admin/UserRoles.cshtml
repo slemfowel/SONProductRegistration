@@ -1,0 +1,155 @@
+﻿@model IEnumerable<SonProductRegistration.Web.Models.AspNetRole>
+
+@{
+
+    ViewBag.Title = "Roles";
+    Layout = "~/Views/Shared/_secureAdmin.cshtml";
+
+    var ISCREATEPRODUCT = (null != Session["ISCREATEPRODUCT"]) ? (bool)Session["ISCREATEPRODUCT"] : false;
+}
+@if (ISCREATEPRODUCT == true)
+{
+    <script>
+        window.addEventListener("DOMContentLoaded", function (evt) {
+            setTimeout(function () {
+                createNewRoleRegistrationForm();
+            }, 100);
+        });
+    </script>
+}
+
+<div id="roles-component">
+    <div class="vatebra-pageheader">
+        <ol class="breadcrumb vatebra-breadcrumb">
+            <li class="breadcrumb-item"><a href="#">@ViewBag.Title</a></li>
+            <li class="breadcrumb-item text-white active" aria-current="page">Dashboard</li>
+        </ol>
+        <h6 class="vatebra-pagetitle text-uppercase">@ViewBag.Title</h6>
+    </div>
+    <div class="section-wrapper">
+        <div class="vatebra-manage-component stackable-panel">
+            <div class="panel manage-roles-listing-panel" selected id="manage-roles-listing-component">
+                <div class="d-flex mb-2">
+                    <div class="d-flex w-100">
+                        <div class="form-group width-30px mb-2 mr-2">
+                            <i class="fa fa-filter text-23px line-height-43px height-40px"></i>
+                        </div>
+
+                        <div mat-input-field class="max-width-400px min-width-350px mr-2 mb-2 mat-input-field form-group">
+                            <div class="label margin-bottom-5px font-weight-bold">Search:</div>
+                            <div class="w-100">
+                                <input type="text" class="form-control" id="search-input-field" placeholder="">
+                            </div>
+                        </div>
+
+                        <div class="">
+                            <button type="submit" class="btn btn-primary mb-2">Search</button>
+                        </div>
+                    </div>
+                     <div class="width-320px">
+                        <div class="d-flex float-right">
+                            <button type="submit" id="new-role-registration-button" class="btn btn-primary mb-2">
+                                <i class="fa fa-plus"></i>
+                                <span>New Role</span>
+                            </button>
+                        </div>
+                    </div> 
+                </div>
+                <div>
+                    <table id="registered-roles-datagridview" class="vatebra-datagridview table table-striped">
+                        <thead class="thead-colored bg-success">
+                            <tr>
+                                <th class="width-60px text-center">
+                                    - # -
+                                </th>
+                                <th>
+                                    Role
+                                </th>
+                                <th>
+                                    Privileges
+                                </th>
+                                <th class="width-150px text-center">Action</th>
+                            </tr>
+                        </thead>
+                        @{
+                            var rowCount = 0;
+                        }
+                        @foreach (var item in Model)
+                        {
+                        <tr aria-datagrid-row data-role-id="@item.Id" href="/my/roledetails/@item.Id">
+                            <td class="text-center">
+                                @Html.Raw(rowCount += 1)
+                            </td>
+                            <td>
+                                @item.Name
+                            </td>
+                            <td>
+                                @item.Name
+                            </td>
+                            <td class="text-center">
+                                @Html.ActionLink("View Details", "Details", new { id = item.Id }, new { @class = "icon ion-edit" })
+                            </td>
+                        </tr>
+                        }
+
+                    </table>
+                </div>
+                <!-- <div>
+                    <nav aria-label="...">
+                        <ul class="pagination">
+                            <li class="page-item disabled">
+                                <span class="page-link">Previous</span>
+                            </li>
+                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item active">
+                                <span class="page-link">
+                                    2
+                                    <span class="sr-only">(current)</span>
+                                </span>
+                            </li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">Next</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div> -->
+            </div>
+
+            <div class="panel role-details-panel" id="role-details-component">
+                <div class="role-details-panel width-300px">
+                    <h1>Role Details</h1>
+                </div>
+                <div class="selected-brand-details-panel">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- create or edit role modal -->
+<div class="modal fade" id="createoredit-role-modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">New Role Registration</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="createoredit-role-modal-view" class="createoredit-role-modal-view pl-3 pt-0 pr-3 pb-3">
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" id="save-role-registration-button" class="btn btn-primary">Create</button>
+            </div>
+        </div>
+    </div>
+</div>
+@{
+    Session.Remove("ISCREATEPRODUCT");
+}

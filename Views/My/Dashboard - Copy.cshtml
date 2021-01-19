@@ -1,0 +1,372 @@
+﻿@model SonProductRegistration.Web.ViewModels.DashboardViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_secureCompany.cshtml";
+}
+
+<div id="company-dashboard-component">
+
+    <div class="vatebra-pageheader">
+        <ol class="breadcrumb vatebra-breadcrumb text-white">
+            <li class="breadcrumb-item text-white"></li>
+            <li class="breadcrumb-item text-white font-weight-bold" aria-current="page">Dashboard</li>
+        </ol>
+        <h2 class="vatebra-pagetitle text-uppercase text-white text-shadow-sm">Welcome back, @Html.Partial("_secureAccountUserNamePartial")</h2>
+    </div>
+
+    <div class="row row-xs d-flex">
+        <div class="col-sm-6 col-lg-3">
+            <div class="card card-status bg-purple text-white border-0 shadow-lg">
+                <div class="media">
+                    <i class="icon ion-thumbsup"></i>
+                    <div class="media-body">
+                        <h1 class="text-white">@Model.TotalApplicationApproved</h1>
+                        <p>Total  Application Approved</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-lg-3 mg-t-10 mg-sm-t-0">
+            <div class="card card-status bg-teal text-white border-0 shadow-lg">
+                <div class="media">
+                    <i class="icon ion-ios-bookmarks-outline"></i>
+                    <div class="media-body">
+                        <h1 class="text-white" id="registredProductCount">@Model.TotalApplicationDecline</h1>
+                        <p>Total Application Decline </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-lg-3 mg-t-10 mg-lg-t-0">
+            <div class="card card-status bg-white border-0 shadow-lg">
+                <div class="media tx-primary">
+                    <i class="icon ion-social-buffer tx-primary"></i>
+                    <div class="media-body">
+                        <h1 class="tx-primary">@Model.TotalAwaitingPayment</h1>
+                        <p>Total Awaiting Payment</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-lg-3 mg-t-10 mg-lg-t-0">
+            <div class="card card-status bg-pink text-white border-0 shadow-lg">
+                <div class="media">
+                    <i class="icon ion-ios-analytics-outline"></i>
+                    <div class="media-body">
+                        <h1 class="text-white">@Model.TotalInProgress</h1>
+                        <p>Total InProgress</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="dropdown-divider mt-3 mb-3"></div>
+
+    <div class="mt-3 d-flex">
+        <div class="w-50 mr-2 p-0">
+            <div class="card shadow-lg mb-3 height-400px">
+                <div class="card-body">
+                    <h5 class="card-title">Product Analytics</h5>
+                    <canvas id="myChart"></canvas>
+                </div>
+            </div>
+            <div class="card shadow-lg">
+                <div class="card-body">
+                    <div class="d-flex">
+                        <div class="w-50">
+                            <h5 class="card-title mb-5">
+                                <i class="float-left mr-2 icon ion-cube text-30px"></i>
+                                <span class="float-left line-height-35px">My Products</span>
+                            </h5>
+                        </div>
+                        <div class="w-50">
+                            <div class="float-right">
+                                <button id="dashboard-new-registration-button" class="btn btn-primary">
+                                    <i class="fa fa-plus"></i>
+                                    <span>New Registration</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Pending</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Incomplete Registration</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="messages-tab" data-toggle="tab" href="#messages" role="tab" aria-controls="messages" aria-selected="false">In Progress</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="settings-tab" data-toggle="tab" href="#settings" role="tab" aria-controls="settings" aria-selected="false">Approved</a>
+                            </li>
+                        </ul>
+
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" class="width-20px">#</th>
+                                            <th scope="col">Product Name</th>
+                                            <th scope="col" class="width-150px">Reg. Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">1</th>
+                                            <td>
+                                                <div>Otto</div>
+                                                <small>Reg. #: SON/PR300419/8576/0</small>
+                                            </td>
+                                            <td>2 weeks ago</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">2</th>
+                                            <td>
+                                                <div>Thornton</div>
+                                                <small>SON/PR300419/1546/1</small>
+                                            </td>
+                                            <td>2 weeks ago</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">2</th>
+                                            <td>
+                                                <div>Jacob</div>
+                                                <small>SON/PR300419/0076/2</small>
+                                            </td>
+                                            <td>2 weeks ago</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">2</th>
+                                            <td>
+                                                <div>Bird</div>
+                                                <small>SON/PR300419/1228/3</small>
+                                            </td>
+                                            <td>2 weeks ago</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">2</th>
+                                            <td>
+                                                <div>Bird</div>
+                                                <small>SON/PR300419/8467/4</small>
+                                            </td>
+                                            <td>2 weeks ago</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">2</th>
+                                            <td>
+                                                <div>Bird</div>
+                                                <small>SON/PR300419/0387/5</small>
+                                            </td>
+                                            <td>2 weeks ago</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
+                            <div class="tab-pane" id="messages" role="tabpanel" aria-labelledby="messages-tab">...</div>
+                            <div class="tab-pane" id="settings" role="tabpanel" aria-labelledby="settings-tab">...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="w-50 ml-2 p-0 d-flex">
+            <div class="w-50 mr-2">
+                <div class="card active shadow-lg">
+                    <div class="card-body height-270px">
+                        <h5 class="card-title text-white mb-5">
+                            <i class="float-left mr-2 icon ion-ios-stopwatch-outline text-30px"></i>
+                            <span class="float-left line-height-35px">Upcoming Renewals</span>
+                        </h5>
+                        <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+                            <div class="carousel-inner">
+                                <div class="carousel-item active shadow-lg">
+                                    <a href="#" class="list-group-item list-group-item-action border-0">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="mb-1">List group item heading</h5>
+                                            <small>3d ago</small>
+                                        </div>
+                                        <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                                        <small>Donec id elit non mi porta.</small>
+                                    </a>
+                                </div>
+                                <div class="carousel-item shadow-lg">
+                                    <a href="#" class="list-group-item list-group-item-action border-0">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="mb-1">List group item heading</h5>
+                                            <small>3d ago</small>
+                                        </div>
+                                        <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                                        <small>Donec id elit non mi porta.</small>
+                                    </a>
+                                </div>
+                                <div class="carousel-item shadow-lg">
+                                    <a href="#" class="list-group-item list-group-item-action border-0">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="mb-1">List group item heading</h5>
+                                            <small>3d ago</small>
+                                        </div>
+                                        <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                                        <small>Donec id elit non mi porta.</small>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="overflow-hidden mt-3">
+                            <div class="float-right">
+                                <span>View All</span>
+                                <i class="ml-2 icon ion-ios-arrow-forward"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card shadow mt-3">
+                    <div class="card-body height-380px">
+                        <h5 class="card-title mb-5">
+                            <i class="float-left mr-2 icon ion-document text-30px"></i>
+                            <span class="float-left line-height-35px">My Demand Notes</span>
+                        </h5>
+                        <div class="list-group">
+                            <a href="#" class="list-group-item list-group-item-action border-left-0 border-right-0 pl-0 pr-0">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-1">List group item heading</h5>
+                                    <small>3d ago</small>
+                                </div>
+                                <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                                <small>Donec id elit non mi porta.</small>
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action border-left-0 border-right-0 border-bottom-0 pl-0 pr-0">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-1">List group item heading</h5>
+                                    <small>3d ago</small>
+                                </div>
+                                <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                                <small>Donec id elit non mi porta.</small>
+                            </a>
+                        </div>
+                        <div class="overflow-hidden mt-3">
+                            <div class="float-right">
+                                <span>View All</span>
+                                <i class="ml-2 icon ion-ios-arrow-forward"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dropdown-divider"></div>
+
+                    <div class="card-body height-390px">
+                        <h5 class="card-title mb-5">
+                            <i class="float-left mr-2 icon ion-document text-30px"></i>
+                            <span class="float-left line-height-35px">eReceipt</span>
+                        </h5>
+                        <div class="list-group">
+                            <a href="#" class="list-group-item list-group-item-action border-left-0 border-right-0 pl-0 pr-0">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-1">List group item heading</h5>
+                                    <small>3d ago</small>
+                                </div>
+                                <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                                <small>Donec id elit non mi porta.</small>
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action border-left-0 border-right-0 border-bottom-0 pl-0 pr-0">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-1">List group item heading</h5>
+                                    <small>3d ago</small>
+                                </div>
+                                <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                                <small>Donec id elit non mi porta.</small>
+                            </a>
+                        </div>
+                        <div class="overflow-hidden mt-3">
+                            <div class="float-right">
+                                <span>View All</span>
+                                <i class="ml-2 icon ion-ios-arrow-forward"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="w-50 ml-2">
+                <div class="card shadow-lg">
+                    <div class="card-body">
+                        <h5 class="card-title mb-5">
+                            <i class="float-left mr-2 icon ion-ios-bell text-30px"></i>
+                            <span class="float-left line-height-35px">Notification</span>
+                        </h5>
+                        <div class="list-group">
+                            <a href="#" class="list-group-item list-group-item-action active border-left-0 border-right-0">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-1">List group item heading</h5>
+                                    <small>3d ago</small>
+                                </div>
+                                <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                                <small>Donec id elit non mi porta.</small>
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action border-left-0 border-right-0">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-1">List group item heading</h5>
+                                    <small class="text-muted">1d ago</small>
+                                </div>
+                                <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                                <small class="text-muted">Donec id elit non mi porta.</small>
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action border-left-0 border-right-0">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-1">List group item heading</h5>
+                                    <small class="text-muted">2w ago</small>
+                                </div>
+                                <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                                <small class="text-muted">Donec id elit non mi porta.</small>
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action border-left-0 border-right-0">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-1">List group item heading</h5>
+                                    <small class="text-muted">2w ago</small>
+                                </div>
+                                <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                                <small class="text-muted">Donec id elit non mi porta.</small>
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action border-left-0 border-right-0">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-1">List group item heading</h5>
+                                    <small class="text-muted">2w ago</small>
+                                </div>
+                                <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                                <small class="text-muted">Donec id elit non mi porta.</small>
+                            </a>
+                        </div>
+                        <div class="overflow-hidden mt-3">
+                            <div class="float-right">
+                                <span>View All</span>
+                                <i class="ml-2 icon ion-ios-arrow-forward"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+
+    </div>
+
+    <div class="col-md-6">
+
+    </div>
+
+
+
+
+    <div>
+
+    </div>
+
+</div>

@@ -1,0 +1,118 @@
+﻿
+@{
+    var controller = ViewBag.Controller.ToLower();
+    var action = ViewBag.Action.ToLower();
+    var id = ViewBag.Id;
+
+    var toggleCompanyStateStyle = "";
+
+    var toggleProductStateStyle = "";
+    if (Session["Module"] == "PRODUCTS")
+    {
+        toggleProductStateStyle = "style='display:block'";
+    }
+
+    var toggleSettingStateStyle = "";
+    if (Session["Module"] == "SETTINGS")
+    {
+        toggleSettingStateStyle = "style='display:block'";
+    }
+
+    var toggleReportStateStyle = "";
+    if (Session["Module"] == "REPORTS")
+    {
+        toggleReportStateStyle = "style='display:block'";
+    }
+
+    var toggleUserStateStyle = "";
+    if (Session["Module"] == "USERS")
+    {
+        toggleUserStateStyle = "style='display:block'";
+    }
+
+
+}
+<ul class="nav nav-sidebar">
+    <li class="sidebar-nav-item">
+        <a href="~/admin/dashboard" class="sidebar-nav-link @Html.Raw(((controller == "admin") && (action == "dashboard")) ? "active shadow" : "")">
+            <i class="icon ion-ios-home"></i>Dashboard
+        </a>
+    </li>
+
+    <li class="sidebar-nav-item">
+        <a href="~/admin/companies" class="sidebar-nav-link @Html.Raw(((controller == "admin") && (action == "companies")) ? "active shadow" : "")">
+            <i class="icon ion-disc"></i>Registered Companies
+        </a>
+    </li>
+    <li class="sidebar-nav-item with-sub">
+        <a href="" class="sidebar-nav-link"><i class="icon ion-cube"></i>Products</a>
+        <ul class="nav sidebar-nav-sub" @Html.Raw(toggleProductStateStyle)>
+            <li class="nav-sub-item">
+                <a href="~/admin/pendingproducts" class="nav-sub-link @Html.Raw(((controller == "admin") && (action == "pendingproducts")) ? "active shadow" : "")">Pending Registration</a>
+            </li>
+            <li class="nav-sub-item">
+                <a href="~/admin/paymentconfirmationlist" class="nav-sub-link @Html.Raw(((controller == "admin") && (action == "paymentconfirmationlist" )) ? "active shadow" : "" )">Payment Confirmation</a>
+            </li>
+            <li class="nav-sub-item">
+                <a href="~/admin/approvalchecklist" class="nav-sub-link @Html.Raw(((controller == "admin") && (action == "approvalchecklist" )) ? "active shadow" : "" )">Approval Checklist</a>
+            </li>
+            <li class="nav-sub-item">
+                <a href="~/admin/inspectionchecklist" class="nav-sub-link @Html.Raw(((controller == "admin") && (action == "inspectionchecklist" )) ? "active shadow" : "" )">Inspection Checklist</a>
+            </li>
+        </ul>
+    </li>
+
+    <li class="sidebar-nav-item with-sub">
+        <a href="~/admin/reports" class="sidebar-nav-link @Html.Raw(((controller == "admin") && (action == "reports")) ? "active shadow" : "")"><i class="icon ion-ios-paper"></i>Reports</a>
+        <ul class="nav sidebar-nav-sub" @Html.Raw(toggleReportStateStyle)>
+            <li class="nav-sub-item">
+                <a href="~/admin/dueforrenewal" class="nav-sub-link @Html.Raw(((controller == "admin") && (action == "dueforrenewal" )) ? "active shadow" : "" )">Due for Renewal</a>
+            </li>
+            <li class="nav-sub-item">
+                <a href="~/admin/defaulterslist" class="nav-sub-link @Html.Raw(((controller == "admin") && (action == "defaulterslist")) ? "active shadow" : "")">Defaulters List</a>
+            </li>
+            <li class="nav-sub-item">
+                <a href="~/admin/disapprovedproducts" class="nav-sub-link @Html.Raw(((controller == "admin") && (action == "disapprovedproducts" )) ? "active shadow" : "" )">Disapproved Products</a>
+            </li>
+            <li class="nav-sub-item">
+                <a href="~/admin/generateddemandnotes" class="nav-sub-link @Html.Raw(((controller == "admin") && (action == "generateddemandnotes" )) ? "active shadow" : "" )">Generated Demand Notes</a>
+            </li>
+            <li class="nav-sub-item">
+                <a href="~/admin/generatedereceipts" class="nav-sub-link @Html.Raw(((controller == "admin") && (action == "generatedereceipts" )) ? "active shadow" : "" )">Generated eReceipt</a>
+            </li>
+        </ul>
+    </li>
+
+    <li class="sidebar-nav-item">
+        <a href="~/admin/scheduledinspectionlist" class="sidebar-nav-link @Html.Raw(((controller == "admin") && (action == "scheduledinspectionlist")) ? "active shadow" : "")"><i class="icon ion-ios-paper"></i>Scheduled Inspection List</a>
+    </li>
+
+    <li class="sidebar-nav-item with-sub">
+        <a href="~/admin/users" class="sidebar-nav-link"><i class="icon ion-ios-people"></i>Users & Security</a>
+        <ul class="nav sidebar-nav-sub" @Html.Raw(toggleUserStateStyle)>
+            <li class="nav-sub-item">
+                <a href="~/admin/users" class="nav-sub-link @Html.Raw(((controller == "admin") && (action == "users" )) ? "active shadow" : "" )">Manage Users</a>
+            </li>
+            <li class="nav-sub-item">
+                <a href="~/admin/userroles" class="nav-sub-link @Html.Raw(((controller == "admin") && (action =="userroles" )) ? "active shadow" : "" )">Roles</a>
+            </li>
+        </ul>
+    </li>
+
+    <li class="sidebar-nav-item">
+        <a href="~/admin/profile" class="sidebar-nav-link @Html.Raw(((controller == "admin") && (action == "profile")) ? "active shadow" : "")"><i class="icon ion-ios-contact"></i>Profile</a>
+    </li>
+
+    <li class="sidebar-nav-item with-sub">
+        <a href="~/admin/settings" class="sidebar-nav-link @Html.Raw(((controller == "admin") && (action == "settings")) ? "active shadow" : "")"><i class="icon ion-ios-gear"></i>Settings</a>
+        <ul class="nav sidebar-nav-sub" @Html.Raw(toggleSettingStateStyle)>
+            <li class="nav-sub-item"><a href="~/admin/managesectors" class="nav-sub-link @Html.Raw(((controller == "admin") && (action == "managesectors")) ? "active shadow" : "")">Manage Sectors</a></li>
+            <li class="nav-sub-item"><a href="~/admin/productcategories" class="nav-sub-link @Html.Raw(((controller == "admin") && (action == "productcategories")) ? "active shadow" : "")">Product Categories</a></li>
+            <li class="nav-sub-item"><a href="~/admin/producttypes" class="nav-sub-link @Html.Raw(((controller == "admin") && (action == "producttypes")) ? "active shadow" : "")">Manage Product Types</a></li>
+            <li class="nav-sub-item"><a href="~/admin/emailtemplates" class="nav-sub-link @Html.Raw(((controller == "admin") && (action == "emailtemplates")) ? "active shadow" : "")">Manage Email Templates</a></li>
+            <li class="nav-sub-item"><a href="~/admin/certificatetemplate" class="nav-sub-link @Html.Raw(((controller == "admin") && (action == "certificatetemplate")) ? "active shadow" : "")">Configure Cert. Template</a></li>
+            <li class="nav-sub-item"><a href="~/admin/warehouseinspectionchecklist" class="nav-sub-link @Html.Raw(((controller == "admin") && (action == "warehouseinspectionchecklist")) ? "active shadow" : "")">Warehouse Inspection Checklist</a></li>
+        </ul>
+    </li>
+
+</ul>
